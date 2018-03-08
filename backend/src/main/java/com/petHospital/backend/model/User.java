@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.petHospital.backend.enumeration.UserRoleEnum;
+
 @Entity
 public class User {
 	
@@ -40,8 +42,8 @@ public class User {
 		return role;
 	}
 
-	public void setRole(int role) {
-		this.role = role;
+	public void setRole(UserRoleEnum assistant) {
+		this.role = assistant.getIndex();
 	}
 
 	public String getPassword() {
