@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.petHospital.backend.dao.UserRepository;
 import com.petHospital.backend.model.User;
 import com.petHospital.backend.service.UserService;
-import com.petHospital.backend.service.UserServiceImpl;
 
 @RestController
 @RequestMapping(path="/User")
