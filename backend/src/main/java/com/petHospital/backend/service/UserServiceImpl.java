@@ -30,17 +30,18 @@ public class UserServiceImpl implements UserService {
 
 	public UserDTO createUser(String name, String password) {
 		User user = new User();
+		UserDTO userDTO = new UserDTO();
 		user.setName(name);
 		user.setPassword(password);
 		try {
 			user = userRepository.save(user);
+			userDTO.setId(user.getId());
+			userDTO.setName(user.getName());
+			userDTO.setRole(user.getRole());
+			userDTO.setMessage("success");
 		}catch(Exception e){
-			user = new User();;
+			userDTO.setMessage("failed");
 		}
-		UserDTO userDTO = new UserDTO();
-		userDTO.setId(user.getId());
-		userDTO.setName(user.getName());
-		userDTO.setRole(user.getRole());
 		return userDTO;
 	}
 

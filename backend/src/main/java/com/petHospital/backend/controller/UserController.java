@@ -14,7 +14,7 @@ import com.petHospital.backend.dto.UserDTO;
 import com.petHospital.backend.service.UserService;
 
 @RestController
-@RequestMapping(path="/User")
+@RequestMapping(path="/user")
 public class UserController {
 
 	@Autowired
