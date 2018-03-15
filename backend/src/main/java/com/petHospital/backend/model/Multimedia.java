@@ -1,9 +1,13 @@
 package com.petHospital.backend.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import com.petHospital.backend.enumeration.MediaEnum;
 
@@ -17,6 +21,21 @@ public class Multimedia {
 	private int type;
 	
 	private int url;
+
+	@ManyToMany(cascade=CascadeType.REFRESH,mappedBy="multimedias")
+    private List<Illness> illnesses;
+    
+	public List<Illness> getIllnesses() {
+		return illnesses;
+	}
+
+	public void setIllnesses(List<Illness> illnesses) {
+		this.illnesses = illnesses;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 
 	public Long getId() {
 		return id;

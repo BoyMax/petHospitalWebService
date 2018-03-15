@@ -1,9 +1,16 @@
 package com.petHospital.backend.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department {
@@ -16,8 +23,16 @@ public class Department {
 	
 	private String description;
 	
-	private Long managerId;
-
+	@ManyToMany(cascade = CascadeType.ALL)  
+	@JoinTable(name = "Department_Manager",  
+	joinColumns = {@JoinColumn(name = "department_id")},  
+	inverseJoinColumns = {@JoinColumn(name = "user_id")})   
+	private List<User> managers;
+	
+	@OneToMany(cascade=CascadeType.ALL)   
+	@JoinColumn(name="department_id")//注释的是另一个表指向本表的外键。   
+	private List<User> users;
+	
 	public Long getId() {
 		return id;
 	}
@@ -41,13 +56,22 @@ public class Department {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public List<User> getUsers() {  
+	    return users;   
+	}  
+	
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
 
-	public Long getManagerId() {
-		return managerId;
+	public void setManagers(List<User> managers) {
+		this.managers = managers;
 	}
 
-	public void setManagerId(Long managerId) {
-		this.managerId = managerId;
+	public List<User> getManagers() {   
+	    return managers;   
 	}
 
 }

@@ -22,6 +22,7 @@ public class UserController {
 
     @RequestMapping(value="/",method=RequestMethod.GET)
     public User getUser(@RequestParam(value="name", defaultValue="Li Vivien") String name) {
+    	    String username = name;
     		return userService.retreiveUser(name);
     }
     

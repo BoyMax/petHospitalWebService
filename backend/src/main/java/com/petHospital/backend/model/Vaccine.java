@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Vaccine {
@@ -24,14 +26,16 @@ public class Vaccine {
 	
 	private Date expirationDate;
 	
-	private Long caseId;
+	@ManyToOne   
+	@JoinColumn(name="illness_id")   
+	private Illness illness;
 
-	public Long getCaseId() {
-		return caseId;
+	public Illness getIllness() {
+		return illness;
 	}
 
-	public void setCaseId(Long caseId) {
-		this.caseId = caseId;
+	public void setIllness(Illness illness) {
+		this.illness = illness;
 	}
 
 	public Long getId() {

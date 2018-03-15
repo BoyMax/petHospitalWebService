@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Question {
@@ -16,17 +18,22 @@ public class Question {
 	
 	private String answer;
 	
-	private String Adescription;
-	
-	private String Bdescription;
-	
-	private String Cdescription;
-	
-	private String Ddescription;
-	
 	private int userType;
 	
-	private Long categoryId;
+	private int questionType; //CHOICE(0), Filling(1),JUDGEMENT(2),DESCRIPTION(3);
+	
+	//for choice question
+	private String Adescription;
+		
+	private String Bdescription;
+
+	private String Cdescription;
+		
+	private String Ddescription;
+		
+	@ManyToOne   
+	@JoinColumn(name="category_id") 
+	private Category category;
 
 	public Long getId() {
 		return id;
@@ -92,11 +99,19 @@ public class Question {
 		this.userType = userType;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public int getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(int questionType) {
+		this.questionType = questionType;
 	}
 }

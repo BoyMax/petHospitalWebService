@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -19,16 +21,19 @@ public class User {
 	private String password;
 	
 	private int status;
-
-	private Long departmentId;
 	
-	public Long getDepartmentId() {
-		return departmentId;
+	@ManyToOne   
+	@JoinColumn(name="department_id")   
+	private Department department;
+	
+	public Department getDepartment() {   
+	    return department;   
+	}  
+	
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
-	public void setDepartmentId(Long departmentId) {
-		this.departmentId = departmentId;
-	}
 
 	public void setRole(int role) {
 		this.role = role;

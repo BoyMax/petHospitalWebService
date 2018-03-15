@@ -1,11 +1,14 @@
 package com.petHospital.backend.model;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Medicine {
@@ -23,13 +26,24 @@ public class Medicine {
 	private Date productionDate;
 	
 	private Date expirationDate;
-
+	
+	@ManyToMany(cascade=CascadeType.REFRESH,mappedBy="medicines")
+    private List<Illness> illnesses;
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Illness> getIllnesses() {
+		return illnesses;
+	}
+
+	public void setIllnesses(List<Illness> illnesses) {
+		this.illnesses = illnesses;
 	}
 
 	public String getName() {
