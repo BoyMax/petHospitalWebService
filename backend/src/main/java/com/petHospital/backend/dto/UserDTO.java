@@ -12,30 +12,24 @@ public class UserDTO {
 
 	private int status;
 	
-	private String message;
-	
-	public String getMessage() {
-		return message;
-	}
+	private DepartmentDTO department;
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+	private String message;
 
 	public Long getId() {
 		return id;
 	}
 
-	public int getRole() {
-		return role;
-	}
-
-	public void setRole(int role) {
-		this.role = role;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -46,14 +40,13 @@ public class UserDTO {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public int getRole() {
+		return role;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRole(int role) {
+		this.role = role;
 	}
-	
 
 	public int getStatus() {
 		return status;
@@ -62,4 +55,22 @@ public class UserDTO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public DepartmentDTO getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(DepartmentDTO department) {
+		this.department = department;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
 }

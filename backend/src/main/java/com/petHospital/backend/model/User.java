@@ -1,12 +1,18 @@
 package com.petHospital.backend.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -15,18 +21,24 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(unique=true)
+	@Column(unique=true, nullable = false)
 	private String name;
 	
 	private int role;
 	
+	@Column(nullable = false)
 	private String password;
 	
 	private int status;
 	
-	@ManyToOne   
-	@JoinColumn(name="department_id")   
+	@ManyToOne(cascade= {CascadeType.REFRESH,CascadeType.DETACH}) 
+	@JoinColumn(name="department_id")  
+	@JsonIgnore
 	private Department department;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "managers") 
+	private List<Department> departments;
 	
 	public Department getDepartment() {   
 	    return department;   
@@ -75,5 +87,13 @@ public class User {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	public List<Department> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
 	}
 }

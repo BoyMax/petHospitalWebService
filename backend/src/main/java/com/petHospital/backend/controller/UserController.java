@@ -24,12 +24,12 @@ public class UserController {
 
     @RequestMapping(value="/add",method=RequestMethod.POST)
     public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO user) {
-    	    UserDTO response =userService.createUser(user.getName(),user.getPassword());
+    	    UserDTO response =userService.createUser(user);
     		return new ResponseEntity<UserDTO>(response,null,HttpStatus.CREATED);
     }
     
-    @RequestMapping(value="/deletet/{id}",method=RequestMethod.DELETE)
-    public ResponseEntity<UserDTO> deletetUser(@PathVariable("id") String id) {
+    @RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable("id") String id) {
     	    UserDTO response = userService.deleteUser(Long.parseLong(id));
     	    return new ResponseEntity<UserDTO>(response,null,HttpStatus.OK);
     }

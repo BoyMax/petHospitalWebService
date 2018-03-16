@@ -28,8 +28,8 @@ public class DepartmentController {
 		return new ResponseEntity<DepartmentDTO>(response, null, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/deletet/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<DepartmentDTO> deletetDepartment(@PathVariable("id") String id) {
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<DepartmentDTO> deleteDepartment(@PathVariable("id") String id) {
 		DepartmentDTO response = departmentService.deleteDepartment(Long.parseLong(id));
 		return new ResponseEntity<DepartmentDTO>(response, null, HttpStatus.OK);
 	}

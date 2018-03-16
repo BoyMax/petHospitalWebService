@@ -3,7 +3,9 @@ package com.petHospital.backend.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,17 +21,18 @@ public class Department {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(unique=true, nullable = false)
 	private String name;
 	
 	private String description;
 	
-	@ManyToMany(cascade = CascadeType.ALL)  
+	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.REFRESH}) 
 	@JoinTable(name = "Department_Manager",  
 	joinColumns = {@JoinColumn(name = "department_id")},  
 	inverseJoinColumns = {@JoinColumn(name = "user_id")})   
 	private List<User> managers;
 	
-	@OneToMany(cascade=CascadeType.ALL)   
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH}, fetch = FetchType.LAZY)   
 	@JoinColumn(name="department_id")//注释的是另一个表指向本表的外键。   
 	private List<User> users;
 	
