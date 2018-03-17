@@ -1,0 +1,6 @@
+{
+    "name": "petHospital",
+    "script": "~/code/petHospitalWebService/backend/start.sh",
+    "exec_interpreter": "bash",
+    "exec_mode": "fork"
+}
