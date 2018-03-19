@@ -14,8 +14,6 @@ public class UserDTO {
 	
 	private DepartmentDTO department;
 
-	private String message;
-
 	public Long getId() {
 		return id;
 	}
@@ -62,14 +60,6 @@ public class UserDTO {
 
 	public void setDepartment(DepartmentDTO department) {
 		this.department = department;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 	
 	

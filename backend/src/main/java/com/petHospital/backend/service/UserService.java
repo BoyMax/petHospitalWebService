@@ -1,11 +1,15 @@
 package com.petHospital.backend.service;
 
+import java.util.List;
+
+import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.dto.UserDTO;
 
 public interface UserService {
-	public UserDTO retreiveUser(String userName);
-	public UserDTO createUser(UserDTO user);
-	public UserDTO deleteUser(Long id);
-	public UserDTO editUser(UserDTO user);
-	public UserDTO validateUser(String name,String password);
+	public ResponseDTO<UserDTO> retreiveUser(String userName);
+	public ResponseDTO<UserDTO> createUser(UserDTO user);
+	public ResponseDTO<UserDTO> deleteUser(Long id);
+	public ResponseDTO<UserDTO> editUser(UserDTO user);
+	public ResponseDTO<UserDTO> validateUser(String name,String password);
+	public ResponseDTO<List<UserDTO>> listAllDepartment();
 }

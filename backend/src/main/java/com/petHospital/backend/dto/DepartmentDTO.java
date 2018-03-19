@@ -14,8 +14,6 @@ public class DepartmentDTO {
 
 	private List<User> managers;
 
-	private String message;
-
 	public Long getId() {
 		return id;
 	}
@@ -46,14 +44,6 @@ public class DepartmentDTO {
 
 	public void setManagers(List<User> managers) {
 		this.managers = managers;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 	
 }
