@@ -15,40 +15,43 @@ import com.petHospital.backend.service.UserService;
 
 @RestController
 @RequestMapping(path="/user")
-public class UserController {
+public class UserController extends CommonController{
 
 	@Autowired
     UserService userService;// = new UserServiceImpl();
     @Autowired
     UserRepository userRepository;
-
+    
+    
     @RequestMapping(value="/add",method=RequestMethod.POST)
     public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO user) {
     	    UserDTO response =userService.createUser(user);
-    		return new ResponseEntity<UserDTO>(response,null,HttpStatus.CREATED);
+    		return new ResponseEntity<UserDTO>(response,getHttpHeaders(),HttpStatus.CREATED);
     }
     
     @RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
     public ResponseEntity<UserDTO> deleteUser(@PathVariable("id") String id) {
     	    UserDTO response = userService.deleteUser(Long.parseLong(id));
-    	    return new ResponseEntity<UserDTO>(response,null,HttpStatus.OK);
+    	    return new ResponseEntity<UserDTO>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/edit",method=RequestMethod.PUT)
     public ResponseEntity<UserDTO> editUser(@RequestBody UserDTO user) {
     	    UserDTO response =userService.editUser(user);
-    		return new ResponseEntity<UserDTO>(response,null,HttpStatus.OK);
+    		return new ResponseEntity<UserDTO>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/{name}",method=RequestMethod.GET)
     public ResponseEntity<UserDTO> getUser(@PathVariable("name") String name) {
     	    UserDTO response = userService.retreiveUser(name);
-    	    return new ResponseEntity<UserDTO>(response,null,HttpStatus.OK);
+    	    return new ResponseEntity<UserDTO>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public ResponseEntity<UserDTO> login (@RequestBody UserDTO user) {
      	UserDTO response = userService.validateUser(user.getName(),user.getPassword());
-    		return new ResponseEntity<UserDTO>(response,null,HttpStatus.OK);
+    		return new ResponseEntity<UserDTO>(response,getHttpHeaders(),HttpStatus.OK);
     }
+    
+	
 }

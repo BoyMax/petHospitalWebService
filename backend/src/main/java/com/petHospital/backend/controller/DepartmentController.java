@@ -15,7 +15,7 @@ import com.petHospital.backend.service.DepartmentService;
 
 @RestController
 @RequestMapping(path = "/department")
-public class DepartmentController {
+public class DepartmentController extends CommonController {
 
 	@Autowired
 	DepartmentService departmentService;
@@ -25,25 +25,25 @@ public class DepartmentController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<DepartmentDTO> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		DepartmentDTO response = departmentService.createDepartment(departmentDTO);
-		return new ResponseEntity<DepartmentDTO>(response, null, HttpStatus.CREATED);
+		return new ResponseEntity<DepartmentDTO>(response, getHttpHeaders(), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<DepartmentDTO> deleteDepartment(@PathVariable("id") String id) {
 		DepartmentDTO response = departmentService.deleteDepartment(Long.parseLong(id));
-		return new ResponseEntity<DepartmentDTO>(response, null, HttpStatus.OK);
+		return new ResponseEntity<DepartmentDTO>(response, getHttpHeaders(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<DepartmentDTO> editDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		DepartmentDTO response = departmentService.editDepartment(departmentDTO);
-		return new ResponseEntity<DepartmentDTO>(response, null, HttpStatus.OK);
+		return new ResponseEntity<DepartmentDTO>(response, getHttpHeaders(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<DepartmentDTO> getDepartment(@PathVariable("id") String id) {
 		DepartmentDTO response = departmentService.retreiveDepartment(Long.parseLong(id));
-		return new ResponseEntity<DepartmentDTO>(response, null, HttpStatus.OK);
+		return new ResponseEntity<DepartmentDTO>(response, getHttpHeaders(), HttpStatus.OK);
 	}
 
 }
