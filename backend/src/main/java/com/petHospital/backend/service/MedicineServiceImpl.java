@@ -56,7 +56,7 @@ public class MedicineServiceImpl implements MedicineService{
 		Medicine medicine = new Medicine();
 		medicine.setName(medicineDTO.getName());
 		medicine.setDescription(medicineDTO.getDescription());
-		medicine.setPrice(medicine.getPrice());
+		medicine.setPrice(medicineDTO.getPrice());
 		medicine.setProductionDate(medicineDTO.getProductionDate());
 		medicine.setExpirationDate(medicineDTO.getExpirationDate());
 		if(validateIllnesses(medicineDTO, medicine, responseDTO) == false) {
@@ -83,7 +83,6 @@ public class MedicineServiceImpl implements MedicineService{
 
 	public ResponseDTO<MedicineDTO> deleteMedicine(Long id) {
 		ResponseDTO<MedicineDTO> responseDTO = new ResponseDTO<MedicineDTO>();
-		MedicineDTO medicineDTO = new MedicineDTO();
 		Medicine medicine;
 		try {
 			medicine = medicineRepository.findOne(id);
@@ -101,7 +100,6 @@ public class MedicineServiceImpl implements MedicineService{
 			medicineRepository.delete(id);
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
-			responseDTO.setData(medicineDTO);
 		}catch(Exception e){
 			responseDTO.setMessage(e.getMessage());
 			responseDTO.setStatus("failed");
@@ -114,7 +112,7 @@ public class MedicineServiceImpl implements MedicineService{
 		Medicine medicine = medicineRepository.findOne(medicineDTO.getId());
 		medicine.setName(medicineDTO.getName());
 		medicine.setDescription(medicineDTO.getDescription());
-		medicine.setPrice(medicine.getPrice());
+		medicine.setPrice(medicineDTO.getPrice());
 		medicine.setProductionDate(medicineDTO.getProductionDate());
 		medicine.setExpirationDate(medicineDTO.getExpirationDate());
 		if(validateIllnesses(medicineDTO,medicine,responseDTO) == false) {
@@ -129,6 +127,7 @@ public class MedicineServiceImpl implements MedicineService{
 			medicineDTO.setProductionDate(medicine.getProductionDate());
 			medicineDTO.setExpirationDate(medicine.getExpirationDate());
 			medicineDTO.setIllnesses(medicine.getIllnesses());
+			responseDTO.setData(medicineDTO);
 			responseDTO.setStatus("success");
 			responseDTO.setMessage("success");
 		}catch(Exception e){
