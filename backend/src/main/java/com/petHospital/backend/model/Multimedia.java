@@ -20,7 +20,7 @@ public class Multimedia {
 	
 	private int type;
 	
-	private int url;
+	private String url;
 
 	@ManyToMany(cascade=CascadeType.REFRESH,mappedBy="multimedias")
     private List<Illness> illnesses;
@@ -53,11 +53,11 @@ public class Multimedia {
 		this.type = type.getIndex();
 	}
 
-	public int getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(int url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 }
