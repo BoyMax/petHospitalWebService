@@ -17,10 +17,17 @@ public class Multimedia {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+	//0:picture  1:video
 	private int type;
 	
 	private String url;
+	
+	/*0:disease_description  
+	  1:process  
+	  2:treatment
+	  3:result
+	*/
+	private int caseType;
 
 	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},mappedBy="multimedias")
     private List<Illness> illnesses;
@@ -59,5 +66,13 @@ public class Multimedia {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public int getCaseType() {
+		return caseType;
+	}
+
+	public void setCaseType(int caseType) {
+		this.caseType = caseType;
 	}
 }
