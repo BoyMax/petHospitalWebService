@@ -18,12 +18,12 @@ import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.MultimediaService;
 
 @RestController
-@RequestMapping(value = "/multimedia", method = RequestMethod.POST)
+@RequestMapping(path = "/multimedia")
 public class MultimediaController extends CommonController{
 	@Autowired
 	MultimediaService multimediaService;
 	
-	@RequestMapping("uploader")
+	@RequestMapping(value = "/uploader", method = RequestMethod.POST)
     public ResponseEntity<ResponseDTO<List<MultimediaDTO>>> upload(HttpServletRequest request){
         MultipartHttpServletRequest Murequest = (MultipartHttpServletRequest)request;
         Map<String, MultipartFile> files = Murequest.getFileMap();//得到文件map对象
