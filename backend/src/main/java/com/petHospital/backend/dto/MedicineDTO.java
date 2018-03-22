@@ -1,21 +1,12 @@
-package com.petHospital.backend.model;
+package com.petHospital.backend.dto;
 
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import com.petHospital.backend.model.Illness;
 
-@Entity
-public class Medicine {
-	
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+public class MedicineDTO {
+private Long id;
 	
 	private String name;
 	
@@ -27,23 +18,14 @@ public class Medicine {
 	
 	private Date expirationDate;
 	
-	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},mappedBy="medicines")
     private List<Illness> illnesses;
-	
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public List<Illness> getIllnesses() {
-		return illnesses;
-	}
-
-	public void setIllnesses(List<Illness> illnesses) {
-		this.illnesses = illnesses;
 	}
 
 	public String getName() {
@@ -85,5 +67,14 @@ public class Medicine {
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-	
+
+	public List<Illness> getIllnesses() {
+		return illnesses;
+	}
+
+	public void setIllnesses(List<Illness> illnesses) {
+		this.illnesses = illnesses;
+	}
+    
+    
 }

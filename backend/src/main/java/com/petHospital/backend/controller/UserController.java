@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.petHospital.backend.dao.UserRepository;
-import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.dto.UserDTO;
 import com.petHospital.backend.service.UserService;
