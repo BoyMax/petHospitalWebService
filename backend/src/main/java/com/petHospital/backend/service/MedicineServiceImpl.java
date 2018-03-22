@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.petHospital.backend.dao.IllnessRepository;
 import com.petHospital.backend.dao.MedicineRepository;
@@ -13,6 +14,7 @@ import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.model.Illness;
 import com.petHospital.backend.model.Medicine;
 
+@Service
 public class MedicineServiceImpl implements MedicineService{
 
 	@Autowired

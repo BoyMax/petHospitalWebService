@@ -22,7 +22,7 @@ public class Multimedia {
 	
 	private String url;
 
-	@ManyToMany(cascade=CascadeType.REFRESH,mappedBy="multimedias")
+	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},mappedBy="multimedias")
     private List<Illness> illnesses;
     
 	public List<Illness> getIllnesses() {
