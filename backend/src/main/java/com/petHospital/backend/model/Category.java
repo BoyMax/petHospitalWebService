@@ -19,8 +19,8 @@ public class Category {
 	
 	private String name;
 
-	@OneToMany(cascade=CascadeType.ALL)   
-	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。   
+	@OneToMany(cascade=CascadeType.REFRESH)
+	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。 
 	private List<Illness> illnesses;
 	
 	@OneToMany(cascade=CascadeType.ALL)   
