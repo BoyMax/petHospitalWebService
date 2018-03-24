@@ -19,15 +19,15 @@ public class Category {
 	
 	private String name;
 
-	@OneToMany(cascade=CascadeType.REFRESH)
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})
 	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。 
 	private List<Illness> illnesses;
 	
-	@OneToMany(cascade=CascadeType.ALL)   
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})   
 	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。   
 	private List<Question> questions;
 
-	@OneToMany(cascade=CascadeType.ALL)   
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})   
 	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。   
 	private List<Exam> exams;
 	

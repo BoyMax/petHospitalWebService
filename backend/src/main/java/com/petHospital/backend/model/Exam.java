@@ -26,7 +26,7 @@ public class Exam {
 	@JoinColumn(name="category_id") 
 	private Category category;
 	
-	@ManyToMany(cascade = CascadeType.ALL)  
+	@ManyToMany(cascade =  {CascadeType.REFRESH,CascadeType.DETACH})  
 	@JoinTable(name = "Exam_Question",  
 	joinColumns = {@JoinColumn(name = "exam_id")},  
 	inverseJoinColumns = {@JoinColumn(name = "question_id")})   

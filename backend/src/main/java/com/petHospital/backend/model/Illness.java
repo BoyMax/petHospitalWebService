@@ -34,19 +34,19 @@ public class Illness {
 	@JoinColumn(name="category_id")   
 	private Category category;
 	
-	@ManyToMany(cascade = CascadeType.ALL)  
+	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})  
 	@JoinTable(name = "Illness_Multimedia",  
 	joinColumns = {@JoinColumn(name = "illness_id")},  
 	inverseJoinColumns = {@JoinColumn(name = "multimedia_id")})   
 	private List<Multimedia> multimedias;
 	
-	@ManyToMany(cascade = CascadeType.ALL)  
+	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})  
 	@JoinTable(name = "Illness_Medicine",  
 	joinColumns = {@JoinColumn(name = "illness_id")},  
 	inverseJoinColumns = {@JoinColumn(name = "medicine_id")})   
 	private List<Medicine> medicines;
 
-	@OneToMany(cascade=CascadeType.ALL)   
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})   
 	@JoinColumn(name="illness_id")//注释的是另一个表指向本表的外键。   
 	private List<Vaccine> vaccines;
 	

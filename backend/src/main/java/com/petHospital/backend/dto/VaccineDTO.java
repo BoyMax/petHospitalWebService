@@ -75,6 +75,4 @@ public class VaccineDTO {
 	public void setIllness(Illness illness) {
 		this.illness = illness;
 	}
-	
-	
 }
