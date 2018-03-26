@@ -27,7 +27,6 @@ public class DepartmentController {
 	@Autowired
 	DepartmentRepository departmentRepository;
 	
-	@CrossOrigin
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.createDepartment(departmentDTO);	
@@ -40,7 +39,6 @@ public class DepartmentController {
 		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
 	}
 
-	@CrossOrigin
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> editDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.editDepartment(departmentDTO);
