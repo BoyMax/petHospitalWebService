@@ -17,7 +17,7 @@ import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.DepartmentService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600,methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 @RestController
 @RequestMapping(path = "/department")
 public class DepartmentController {
