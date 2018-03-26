@@ -20,7 +20,7 @@ import com.petHospital.backend.service.DepartmentService;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(path = "/department")
-public class DepartmentController extends CommonController {
+public class DepartmentController {
 
 	@Autowired
 	DepartmentService departmentService;
@@ -30,7 +30,7 @@ public class DepartmentController extends CommonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.createDepartment(departmentDTO);	
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, getHttpHeaders(), HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -42,19 +42,19 @@ public class DepartmentController extends CommonController {
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> editDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.editDepartment(departmentDTO);
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> getDepartment(@PathVariable("id") String id) {
 		ResponseDTO<DepartmentDTO> response = departmentService.retreiveDepartment(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<DepartmentDTO>>> listDepartments() {
 		ResponseDTO<List<DepartmentDTO>> response = departmentService.listAllDepartment();
-		return new ResponseEntity<ResponseDTO<List<DepartmentDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<DepartmentDTO>>>(response, null, HttpStatus.OK);
 	}
 
 }
