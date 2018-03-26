@@ -26,19 +26,21 @@ public class DepartmentController {
 	DepartmentService departmentService;
 	@Autowired
 	DepartmentRepository departmentRepository;
-
+	
+	@CrossOrigin
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.createDepartment(departmentDTO);	
 		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.CREATED);
 	}
-
+	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> deleteDepartment(@PathVariable("id") String id) {
 		ResponseDTO<DepartmentDTO> response = departmentService.deleteDepartment(Long.parseLong(id));
 		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> editDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.editDepartment(departmentDTO);
