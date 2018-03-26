@@ -19,7 +19,7 @@ import com.petHospital.backend.service.DepartmentService;
 
 @CrossOrigin(origins = "*", maxAge = 3600,methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 @RestController
-@RequestMapping(path = "/department")
+@RequestMapping(path = "/department", method = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 public class DepartmentController {
 
 	@Autowired
