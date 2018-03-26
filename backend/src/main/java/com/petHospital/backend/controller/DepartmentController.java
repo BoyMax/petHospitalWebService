@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.DepartmentService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(path = "/department")
 public class DepartmentController extends CommonController {
@@ -34,7 +36,7 @@ public class DepartmentController extends CommonController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> deleteDepartment(@PathVariable("id") String id) {
 		ResponseDTO<DepartmentDTO> response = departmentService.deleteDepartment(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
