@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Illness {
 	
@@ -34,18 +36,21 @@ public class Illness {
 	@JoinColumn(name="category_id")   
 	private Category category;
 	
+	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})  
 	@JoinTable(name = "Illness_Multimedia",  
 	joinColumns = {@JoinColumn(name = "illness_id")},  
 	inverseJoinColumns = {@JoinColumn(name = "multimedia_id")})   
 	private List<Multimedia> multimedias;
 	
+	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})  
 	@JoinTable(name = "Illness_Medicine",  
 	joinColumns = {@JoinColumn(name = "illness_id")},  
 	inverseJoinColumns = {@JoinColumn(name = "medicine_id")})   
 	private List<Medicine> medicines;
 
+	@JsonIgnore
 	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})   
 	@JoinColumn(name="illness_id")//注释的是另一个表指向本表的外键。   
 	private List<Vaccine> vaccines;
@@ -120,5 +125,13 @@ public class Illness {
 
 	public void setMultimedias(List<Multimedia> multimedias) {
 		this.multimedias = multimedias;
+	}
+	
+	public List<Vaccine> getVaccines() {
+		return vaccines;
+	}
+
+	public void setVaccines(List<Vaccine> vaccines) {
+		this.vaccines = vaccines;
 	}
 }

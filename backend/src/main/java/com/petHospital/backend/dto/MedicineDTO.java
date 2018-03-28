@@ -6,7 +6,7 @@ import java.util.List;
 import com.petHospital.backend.model.Illness;
 
 public class MedicineDTO {
-private Long id;
+	private Long id;
 	
 	private String name;
 	
