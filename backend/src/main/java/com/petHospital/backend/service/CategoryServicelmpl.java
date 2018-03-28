@@ -44,6 +44,100 @@ public class CategoryServicelmpl implements CategoryService {
 		return responseDTO;
 	}
 	 
+	 public ResponseDTO<CategoryDTO> retreiveCategory(Long id) {
+			ResponseDTO<CategoryDTO> responseDTO = new ResponseDTO<CategoryDTO>();
+			Category category = new Category();
+			CategoryDTO categoryDTO = new CategoryDTO();
+			try {
+				category = categoryRepository.findOne(id);
+				if (category == null) {
+					responseDTO.setMessage("Category"+id+"does not exist.");
+					responseDTO.setStatus("failed");
+					return responseDTO;
+				}
+			}catch(Exception e) {
+				responseDTO.setMessage(e.getMessage());
+				responseDTO.setStatus("failed");
+			}
+			categoryDTO.setId(category.getId());
+			categoryDTO.setName(category.getName());
+			categoryDTO.setIllnesses(category.getIllnesses());
+			responseDTO.setStatus("success");
+			responseDTO.setMessage("success");
+			responseDTO.setData(categoryDTO);
+			return responseDTO;
+		}
+	 
+	 public ResponseDTO<CategoryDTO> deleteCategory(Long id) {
+			ResponseDTO<CategoryDTO> responseDTO = new ResponseDTO<CategoryDTO>();
+			CategoryDTO categoryDTO = new CategoryDTO();
+			Category category = categoryRepository.findOne(id);
+			if(category == null) {
+				responseDTO.setMessage("Category "+id+" does not exist");
+				responseDTO.setStatus("failed");
+				return responseDTO;
+			}
+			try {
+				categoryRepository.delete(id);
+				responseDTO.setMessage("success");
+				responseDTO.setStatus("success");
+				responseDTO.setData(categoryDTO);
+			}catch(Exception e){
+				responseDTO.setMessage(e.getMessage());
+				responseDTO.setStatus("failed");
+			}
+			return responseDTO;
+		}
+
+		public ResponseDTO<CategoryDTO> editCategory(CategoryDTO categoryDTO) {
+			ResponseDTO<CategoryDTO> responseDTO = new ResponseDTO<CategoryDTO>();
+			Category category = categoryRepository.findOne(categoryDTO.getId());
+			category.setName(categoryDTO.getName());
+			if(validateIllnesses(categoryDTO,category,responseDTO) == false) {
+				return responseDTO;
+			}
+			try {
+				categoryRepository.save(category);
+				categoryDTO.setId(category.getId());
+				categoryDTO.setName(category.getName());
+				categoryDTO.setIllnesses(category.getIllnesses());
+				responseDTO.setMessage("success");
+				responseDTO.setData(categoryDTO);
+				responseDTO.setStatus("success");
+			}catch(Exception e){
+				responseDTO.setMessage(e.getMessage());
+				responseDTO.setStatus("failed");
+			}
+			return responseDTO;
+		}
+
+
+		public ResponseDTO<List<CategoryDTO>> listAllCategory() {
+			ResponseDTO<List<CategoryDTO>> responseDTO = new ResponseDTO<List<CategoryDTO>>();
+			ArrayList<CategoryDTO> categoryDTOs = new ArrayList<CategoryDTO>();
+			List<Category> categorys = new ArrayList<Category>();
+			try {
+				categorys = (List<Category>) categoryRepository.findAll();
+			} catch (Exception e) {
+				responseDTO.setStatus("failed");
+				responseDTO.setMessage(e.getMessage());
+				return responseDTO;
+			}
+			for (Category category : categorys) {
+				CategoryDTO categoryDTO = new CategoryDTO();
+				categoryDTO.setId(category.getId());
+				categoryDTO.setName(category.getName());
+				categoryDTO.setIllnesses(category.getIllnesses());
+				responseDTO.setMessage("success");
+				categoryDTOs.add(categoryDTO);
+			}
+			responseDTO.setMessage("status");
+			responseDTO.setStatus("success");
+			responseDTO.setData(categoryDTOs);
+			
+			return responseDTO;
+		}
+	 
 	// Validate illness id from CategoryDTO.getIllnesses and then set valid illness to category.
 		private boolean validateIllnesses(CategoryDTO categoryDTO, Category category, ResponseDTO<CategoryDTO> responseDTO) {
 			List<Illness> illnesses = categoryDTO.getIllnesses();
