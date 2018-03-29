@@ -148,7 +148,7 @@ public class VaccineServiceImpl implements VaccineService{
 
 	
 	
-	public ResponseDTO<List<VaccineDTO>> listIllnesses() {
+	public ResponseDTO<List<VaccineDTO>> listVaccines() {
 		ResponseDTO<List<VaccineDTO>> responseDTO = new ResponseDTO<List<VaccineDTO>>();
 		ArrayList<VaccineDTO> vaccineDTOs = new ArrayList<VaccineDTO>();
 		List<Vaccine> vaccines = new ArrayList<Vaccine>();

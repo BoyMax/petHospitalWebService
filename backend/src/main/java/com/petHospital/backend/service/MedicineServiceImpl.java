@@ -137,7 +137,7 @@ public class MedicineServiceImpl implements MedicineService{
 		return responseDTO;
 	}
 
-	public ResponseDTO<List<MedicineDTO>> listIllnesses() {
+	public ResponseDTO<List<MedicineDTO>> listMedicines() {
 		ResponseDTO<List<MedicineDTO>> responseDTO = new ResponseDTO<List<MedicineDTO>>();
 		ArrayList<MedicineDTO> medicineDTOs = new ArrayList<MedicineDTO>();
 		List<Medicine> medicines = new ArrayList<Medicine>();

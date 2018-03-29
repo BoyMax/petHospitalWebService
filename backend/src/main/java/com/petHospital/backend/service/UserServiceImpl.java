@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
 		return responseDTO;
 	}
 	
-	public ResponseDTO<List<UserDTO>> listAllDepartment() {
+	public ResponseDTO<List<UserDTO>> listAllUsers() {
 		ResponseDTO<List<UserDTO>> responseDTO = new ResponseDTO<List<UserDTO>>();
 		ArrayList<UserDTO> userDTOs = new ArrayList<UserDTO>();
 		List<User> users = new ArrayList<User>();

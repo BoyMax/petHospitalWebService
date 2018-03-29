@@ -10,5 +10,5 @@ public interface VaccineService {
 	public ResponseDTO<VaccineDTO> createVaccine(VaccineDTO medicine);
 	public ResponseDTO<VaccineDTO> deleteVaccine(Long id);
 	public ResponseDTO<VaccineDTO> editVaccine(VaccineDTO medicine);
-	public ResponseDTO<List<VaccineDTO>> listIllnesses();
+	public ResponseDTO<List<VaccineDTO>> listVaccines();
 }

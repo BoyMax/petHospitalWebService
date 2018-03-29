@@ -27,32 +27,32 @@ public class MedicineController extends CommonController{
     
     
     @RequestMapping(value="/add",method=RequestMethod.POST)
-    public ResponseEntity<ResponseDTO<MedicineDTO>> addUser(@RequestBody MedicineDTO medicine) {
+    public ResponseEntity<ResponseDTO<MedicineDTO>> addMedicine(@RequestBody MedicineDTO medicine) {
     		ResponseDTO<MedicineDTO> response =medicineService.createMedicine(medicine);
     		return new ResponseEntity<ResponseDTO<MedicineDTO>>(response,getHttpHeaders(),HttpStatus.CREATED);
     }
     
     @RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
-    public ResponseEntity<ResponseDTO<MedicineDTO>> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<ResponseDTO<MedicineDTO>> deleteMedicine(@PathVariable("id") String id) {
     		ResponseDTO<MedicineDTO> response = medicineService.deleteMedicine(Long.parseLong(id));
     	    return new ResponseEntity<ResponseDTO<MedicineDTO>>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/edit",method=RequestMethod.PUT)
-    public ResponseEntity<ResponseDTO<MedicineDTO>> editUser(@RequestBody MedicineDTO medicine) {
+    public ResponseEntity<ResponseDTO<MedicineDTO>> editMedicine(@RequestBody MedicineDTO medicine) {
     		ResponseDTO<MedicineDTO> response =medicineService.editMedicine(medicine);
     		return new ResponseEntity<ResponseDTO<MedicineDTO>>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/{id}",method=RequestMethod.GET)
-    public ResponseEntity<ResponseDTO<MedicineDTO>> getUser(@PathVariable("id") String id) {
+    public ResponseEntity<ResponseDTO<MedicineDTO>> getMedicine(@PathVariable("id") String id) {
     		ResponseDTO<MedicineDTO> response = medicineService.retreiveMedicine(Long.parseLong(id));
     	    return new ResponseEntity<ResponseDTO<MedicineDTO>>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<ResponseDTO<List<MedicineDTO>>> listIllnesses() {
-		ResponseDTO<List<MedicineDTO>> response = medicineService.listIllnesses();
+	public ResponseEntity<ResponseDTO<List<MedicineDTO>>> listMedicines() {
+		ResponseDTO<List<MedicineDTO>> response = medicineService.listMedicines();
 		return new ResponseEntity<ResponseDTO<List<MedicineDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
 	}
 }

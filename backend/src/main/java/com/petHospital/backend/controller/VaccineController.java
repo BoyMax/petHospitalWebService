@@ -26,32 +26,32 @@ public class VaccineController extends CommonController{
     
     
     @RequestMapping(value="/add",method=RequestMethod.POST)
-    public ResponseEntity<ResponseDTO<VaccineDTO>> addUser(@RequestBody VaccineDTO vaccine) {
+    public ResponseEntity<ResponseDTO<VaccineDTO>> addVaccine(@RequestBody VaccineDTO vaccine) {
     		ResponseDTO<VaccineDTO> response =vaccineService.createVaccine(vaccine);
     		return new ResponseEntity<ResponseDTO<VaccineDTO>>(response,getHttpHeaders(),HttpStatus.CREATED);
     }
     
     @RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
-    public ResponseEntity<ResponseDTO<VaccineDTO>> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<ResponseDTO<VaccineDTO>> deleteVaccine(@PathVariable("id") String id) {
     		ResponseDTO<VaccineDTO> response = vaccineService.deleteVaccine(Long.parseLong(id));
     	    return new ResponseEntity<ResponseDTO<VaccineDTO>>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/edit",method=RequestMethod.PUT)
-    public ResponseEntity<ResponseDTO<VaccineDTO>> editUser(@RequestBody VaccineDTO vaccine) {
+    public ResponseEntity<ResponseDTO<VaccineDTO>> editVaccine(@RequestBody VaccineDTO vaccine) {
     		ResponseDTO<VaccineDTO> response =vaccineService.editVaccine(vaccine);
     		return new ResponseEntity<ResponseDTO<VaccineDTO>>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value="/{id}",method=RequestMethod.GET)
-    public ResponseEntity<ResponseDTO<VaccineDTO>> getUser(@PathVariable("id") String id) {
+    public ResponseEntity<ResponseDTO<VaccineDTO>> getVaccine(@PathVariable("id") String id) {
     		ResponseDTO<VaccineDTO> response = vaccineService.retreiveVaccine(Long.parseLong(id));
     	    return new ResponseEntity<ResponseDTO<VaccineDTO>>(response,getHttpHeaders(),HttpStatus.OK);
     }
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<ResponseDTO<List<VaccineDTO>>> listIllnesses() {
-		ResponseDTO<List<VaccineDTO>> response = vaccineService.listIllnesses();
+	public ResponseEntity<ResponseDTO<List<VaccineDTO>>> listVaccines() {
+		ResponseDTO<List<VaccineDTO>> response = vaccineService.listVaccines();
 		return new ResponseEntity<ResponseDTO<List<VaccineDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
 	}
 }

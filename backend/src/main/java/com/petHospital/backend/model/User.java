@@ -24,12 +24,12 @@ public class User {
 	@Column(unique=true, nullable = false)
 	private String name;
 	
-	private int role;
+	private int role;   //ADMIN(0), RECEPTION(1),VETERINARIAN(2),ASSISTANT(3);
 	
 	@Column(nullable = false)
 	private String password;
 	
-	private int status;
+	private int status;  //ENABLE(0), DISABLE(1),DELETE(2);
 	
 	@ManyToOne(cascade= {CascadeType.REFRESH,CascadeType.DETACH}) 
 	@JoinColumn(name="department_id")  

@@ -10,5 +10,5 @@ public interface MedicineService {
 	public ResponseDTO<MedicineDTO> createMedicine(MedicineDTO medicine);
 	public ResponseDTO<MedicineDTO> deleteMedicine(Long id);
 	public ResponseDTO<MedicineDTO> editMedicine(MedicineDTO medicine);
-	public ResponseDTO<List<MedicineDTO>> listIllnesses();
+	public ResponseDTO<List<MedicineDTO>> listMedicines();
 }

@@ -11,5 +11,5 @@ public interface UserService {
 	public ResponseDTO<UserDTO> deleteUser(Long id);
 	public ResponseDTO<UserDTO> editUser(UserDTO user);
 	public ResponseDTO<UserDTO> validateUser(String name,String password);
-	public ResponseDTO<List<UserDTO>> listAllDepartment();
+	public ResponseDTO<List<UserDTO>> listAllUsers();
 }

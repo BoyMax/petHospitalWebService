@@ -58,7 +58,7 @@ public class UserController extends CommonController{
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<UserDTO>>> listDepartments() {
-		ResponseDTO<List<UserDTO>> response = userService.listAllDepartment();
+		ResponseDTO<List<UserDTO>> response = userService.listAllUsers();
 		return new ResponseEntity<ResponseDTO<List<UserDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
 	}
 }
