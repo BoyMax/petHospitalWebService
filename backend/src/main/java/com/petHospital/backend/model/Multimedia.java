@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.petHospital.backend.enumeration.MediaEnum;
-
 @Entity
 public class Multimedia {
 	
@@ -55,11 +53,7 @@ public class Multimedia {
 	public int getType() {
 		return type;
 	}
-
-	public void setType(MediaEnum type) {
-		this.type = type.getIndex();
-	}
-
+	
 	public String getUrl() {
 		return url;
 	}

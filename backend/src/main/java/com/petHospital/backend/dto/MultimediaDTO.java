@@ -1,7 +1,5 @@
 package com.petHospital.backend.dto;
 
-import com.petHospital.backend.enumeration.MediaEnum;
-
 public class MultimediaDTO {
 	private Long id;
 	
@@ -25,10 +23,6 @@ public class MultimediaDTO {
 
 	public int getType() {
 		return type;
-	}
-
-	public void setType(MediaEnum type) {
-		this.type = type.getIndex();
 	}
 
 	public String getUrl() {
