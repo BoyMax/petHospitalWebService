@@ -32,6 +32,7 @@ public class Illness {
 	
 	private String result;
 	
+	@JsonIgnore
 	@ManyToOne   
 	@JoinColumn(name="category_id")   
 	private Category category;

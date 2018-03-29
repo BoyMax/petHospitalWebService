@@ -38,7 +38,7 @@ public class IllnessController extends CommonController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
-	public ResponseEntity<ResponseDTO<IllnessDTO>> editDepartment(@RequestBody IllnessDTO illnessDTO) {
+	public ResponseEntity<ResponseDTO<IllnessDTO>> editIllness(@RequestBody IllnessDTO illnessDTO) {
 		ResponseDTO<IllnessDTO> response = illnessService.editIllness(illnessDTO);
 		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response, getHttpHeaders(), HttpStatus.OK);
 	}
@@ -48,9 +48,9 @@ public class IllnessController extends CommonController {
 		ResponseDTO<IllnessDTO> response = illnessService.retreiveIllness(Long.parseLong(id));
 		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response, getHttpHeaders(), HttpStatus.OK);
 	}
-
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ResponseEntity<ResponseDTO<List<IllnessDTO>>> listDepartments() {
+	public ResponseEntity<ResponseDTO<List<IllnessDTO>>> listIllnesss() {
 		ResponseDTO<List<IllnessDTO>> response = illnessService.listAllIllness();
 		return new ResponseEntity<ResponseDTO<List<IllnessDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
 	}

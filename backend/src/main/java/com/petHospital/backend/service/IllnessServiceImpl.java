@@ -59,7 +59,7 @@ public class IllnessServiceImpl implements IllnessService {
 		illnessDTO.setProcess(illness.getProcess());
 		illnessDTO.setTreatment(illness.getTreatment());
 		illnessDTO.setResult(illness.getResult());
-		//illnessDTO.setCategory(illness.getCategory());
+		illnessDTO.setCategory(illness.getCategory());
 		illnessDTO.setMedicines(illness.getMedicines());
 		illnessDTO.setMultimedias(illness.getMultimedias());
 	    illnessDTO.setVaccines(illness.getVaccines());
@@ -68,6 +68,7 @@ public class IllnessServiceImpl implements IllnessService {
 		responseDTO.setData(illnessDTO);
 		return responseDTO;
 	}
+	
 
 	public ResponseDTO<IllnessDTO> createIllness(IllnessDTO illnessDTO) {
 		    ResponseDTO<IllnessDTO> responseDTO = new ResponseDTO<IllnessDTO>();
@@ -86,7 +87,7 @@ public class IllnessServiceImpl implements IllnessService {
 				illnessDTO.setName(illness.getName());
 				illnessDTO.setDiseaseDescription(illness.getDiseaseDescription());
 				illnessDTO.setProcess(illness.getProcess());
-				//illnessDTO.setCategory(illness.getCategory());
+				illnessDTO.setCategory(illness.getCategory());
 				illnessDTO.setMedicines(illness.getMedicines());
 				illnessDTO.setMultimedias(illness.getMultimedias());
 				illnessDTO.setResult(illness.getResult());
@@ -140,7 +141,7 @@ public class IllnessServiceImpl implements IllnessService {
 			illnessDTO.setName(illness.getName());
 			illnessDTO.setDiseaseDescription(illness.getDiseaseDescription());
 			illnessDTO.setProcess(illness.getProcess());
-			//illnessDTO.setCategory(illness.getCategory());
+			illnessDTO.setCategory(illness.getCategory());
 			illnessDTO.setMedicines(illness.getMedicines());
 			illnessDTO.setMultimedias(illness.getMultimedias());
 			illnessDTO.setResult(illness.getResult());
@@ -173,7 +174,7 @@ public class IllnessServiceImpl implements IllnessService {
 			illnessDTO.setName(illness.getName());
 			illnessDTO.setDiseaseDescription(illness.getDiseaseDescription());
 			illnessDTO.setProcess(illness.getProcess());
-			//illnessDTO.setCategory(illness.getCategory());
+			illnessDTO.setCategory(illness.getCategory());
 			illnessDTO.setMedicines(illness.getMedicines());
 			illnessDTO.setMultimedias(illness.getMultimedias());
 			illnessDTO.setResult(illness.getResult());
@@ -191,6 +192,23 @@ public class IllnessServiceImpl implements IllnessService {
 	// Validate illness id from CategoryDTO.getIllnesses and then set valid illness to category.
 	private boolean validateIllness(IllnessDTO illnessDTO, Illness illness, ResponseDTO<IllnessDTO> responseDTO) {
 
+		
+		//category
+		Category category = illnessDTO.getCategory();
+		if(category != null) {
+			try {
+				category=categoryRepository.findOne(category.getId());
+				
+			}catch (Exception e) {
+				responseDTO.setError_code("404");
+				responseDTO.setStatus("failed");
+				responseDTO.setMessage("category does not exist who's id =" + category.getId().toString());
+				return false;
+			}
+			
+		}
+		illness.setCategory(category);
+		
 		//medicine
 		List<Medicine> medicines = illnessDTO.getMedicines();
 		List<Medicine> medicineEntity = new ArrayList<Medicine>();
