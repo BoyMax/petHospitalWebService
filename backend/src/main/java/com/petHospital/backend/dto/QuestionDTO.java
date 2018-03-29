@@ -1,19 +1,11 @@
-package com.petHospital.backend.model;
+package com.petHospital.backend.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.petHospital.backend.model.Category;
 
-@Entity
-public class Question {
+public class QuestionDTO {
 	
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private Long id;
 	
 	private String askDescription;
@@ -33,9 +25,6 @@ public class Question {
 		
 	private String Ddescription;
 		
-	@ManyToOne   
-	@JoinColumn(name="category_id")
-	@JsonIgnore
 	private Category category;
 
 	public Long getId() {
