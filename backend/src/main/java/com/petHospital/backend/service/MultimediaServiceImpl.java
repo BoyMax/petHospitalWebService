@@ -27,7 +27,8 @@ public class MultimediaServiceImpl implements MultimediaService{
         System.out.println(url);
         if(!dir.exists())//目录不存在则创建
             dir.mkdirs();
-        for(MultipartFile file :files.values()){String fileName=file.getOriginalFilename();
+        for(MultipartFile file :files.values()){
+        	String fileName=file.getOriginalFilename();
             File tagetFile = new File(url + fileName);//创建文件对象
             Multimedia multimedia = new Multimedia();
             MultimediaDTO multimediaDTO = new MultimediaDTO();
@@ -37,15 +38,18 @@ public class MultimediaServiceImpl implements MultimediaService{
                 } catch (IOException e) {
                 	responseDTO.setStatus("failed");
         			responseDTO.setMessage(e.getMessage());
+        			return responseDTO;
                 }
                 try {
                     file.transferTo(tagetFile);
                 } catch (IllegalStateException e) {
                 	responseDTO.setStatus("failed");
         			responseDTO.setMessage(e.getMessage());
+        			return responseDTO;
                 } catch (IOException e) {
                 	responseDTO.setStatus("failed");
         			responseDTO.setMessage(e.getMessage());
+        			return responseDTO;
                 }
                 try {
                 	multimedia.setType(0);
@@ -55,6 +59,7 @@ public class MultimediaServiceImpl implements MultimediaService{
                 } catch (Exception e) {
                 	responseDTO.setStatus("failed");
         			responseDTO.setMessage(e.getMessage());
+        			return responseDTO;
                 }
                 multimediaDTO.setId(multimedia.getId());
                 multimediaDTO.setType(0);
