@@ -60,5 +60,6 @@ public class QuestionController extends CommonController {
 		ResponseDTO<List<QuestionDTO>> response = questionService.listQuestionByCategory(Long.parseLong(id));
 		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
 	}
-	
+
+
 }
