@@ -224,7 +224,6 @@ public static List<Question> getRandomList(List<Question> paramList,int count){
     return newList;
 }
 
-@Override
 public ResponseDTO<List<ExamDTO>> listAllExam() {
 	ResponseDTO<List<ExamDTO>> responseDTO = new ResponseDTO<List<ExamDTO>>();
 	ArrayList<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
