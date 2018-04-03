@@ -27,7 +27,7 @@ public class MultimediaController extends CommonController{
     public ResponseEntity<ResponseDTO<List<MultimediaDTO>>> upload(HttpServletRequest request){
         MultipartHttpServletRequest Murequest = (MultipartHttpServletRequest)request;
         Map<String, MultipartFile> files = Murequest.getFileMap();//得到文件map对象
-        String upaloadUrl = "/home/images";//得到当前工程路径拼接上文件名
+        String upaloadUrl = "/home/images/";//得到当前工程路径拼接上文件名
         int caseType = Integer.valueOf(request.getParameter("caseType"));
         long caseId = Long.valueOf(request.getParameter("caseId"));
         /*System.out.println(request.getParameter("caseId"));
