@@ -25,8 +25,8 @@ import com.petHospital.backend.dto.VaccineDTO;
 @SpringBootTest
 public class VaccineTest 
 {
-	String existId = "1";
-	String notExistId = "2";
+	String existId = "2";
+	String notExistId = "1";
 	
 	@Autowired
     private VaccineController vaccineController;
@@ -48,7 +48,7 @@ public class VaccineTest
     @Test
     @Transactional  
     @Rollback(true)
-    public void testGetMedicine()
+    public void testGetVaccine()
     {
     	    //id not in db
     		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity1 = vaccineController.getVaccine(notExistId);
@@ -61,7 +61,7 @@ public class VaccineTest
     @Test
     @Transactional  
     @Rollback(true)
-    public void testEditMedicine(){
+    public void testEditVaccine(){
     		VaccineDTO VaccineDTO = new VaccineDTO();
     		VaccineDTO.setId(Long.parseLong(existId));
     		VaccineDTO.setName("乙肝疫苗");
@@ -76,7 +76,7 @@ public class VaccineTest
     @Test
     @Transactional  
     @Rollback(true)
-    public void testAddMedicine() {
+    public void testAddVaccine() {
     		VaccineDTO VaccineDTO = new VaccineDTO();
     		VaccineDTO.setName("甲肝疫苗");
 		VaccineDTO.setDescription("预防甲肝");
@@ -90,7 +90,7 @@ public class VaccineTest
     @Test
     @Transactional  
     @Rollback(true)
-    public void testDeleteMedicine() {
+    public void testDeleteVaccine() {
 		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity = vaccineController.deleteVaccine(existId);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
     }

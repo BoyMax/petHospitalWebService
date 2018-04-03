@@ -1,15 +1,10 @@
 package com.petHospital.backend.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.sql.*;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.petHospital.backend.dao.QuestionRepository;
 import com.petHospital.backend.dto.QuestionDTO;
@@ -178,14 +173,14 @@ public class QuestionServiceImpl implements QuestionService {
 			
 			questionDTOs.add(questionDTO);
 		}
-		responseDTO.setMessage("status");
+		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(questionDTOs);
 		
 		return responseDTO;
 	}
 
-	@Override
+	
 	public ResponseDTO<List<QuestionDTO>> listQuestionByCategory(Long catagoryId) {
 		ResponseDTO<List<QuestionDTO>> responseDTO = new ResponseDTO<List<QuestionDTO>>();
 		ArrayList<QuestionDTO> questionDTOs = new ArrayList<QuestionDTO>();
@@ -212,20 +207,10 @@ public class QuestionServiceImpl implements QuestionService {
 			
 			questionDTOs.add(questionDTO);
 		}
-		responseDTO.setMessage("status");
+		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(questionDTOs);
 		
 		return responseDTO;
 	}
-	
-	
-	
-
-	}
-
-
-	
-	// Validate manager id from DepartmentDTO.getManagers and then set valid manager
-	// to department.
-
+}
