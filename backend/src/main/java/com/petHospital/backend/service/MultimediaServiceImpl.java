@@ -25,7 +25,7 @@ public class MultimediaServiceImpl implements MultimediaService{
 	
 	@Autowired
 	IllnessRepository illnessRepository;
-	public synchronized ResponseDTO<List<MultimediaDTO>> uploadPic(Map<String, MultipartFile> files, String url, long caseId, int caseType) {
+	public synchronized ResponseDTO<List<MultimediaDTO>> uploadPic(Map<String, MultipartFile> files, String url, long caseId, int caseType, int type) {
 		Illness illness = illnessRepository.findOne(caseId);
 		ResponseDTO<List<MultimediaDTO>> responseDTO = new ResponseDTO<List<MultimediaDTO>>();
 		//存储返回多媒体DTO
@@ -62,7 +62,7 @@ public class MultimediaServiceImpl implements MultimediaService{
         			return responseDTO;
                 }
                 try {
-                	multimedia.setType(0);
+                	multimedia.setType(type);
                     multimedia.setUrl(url + fileName);
                     multimedia.setCaseType(caseType);
                     multimedia = multimediaRepository.save(multimedia);
