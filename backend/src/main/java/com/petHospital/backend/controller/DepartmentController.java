@@ -17,9 +17,10 @@ import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.DepartmentService;
 
-@CrossOrigin(origins = "*", maxAge = 3600,methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
+
 @RestController
-@RequestMapping(path = "/department", method = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
+@RequestMapping(path = "/department")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class DepartmentController {
 
 	@Autowired
@@ -30,7 +31,7 @@ public class DepartmentController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.createDepartment(departmentDTO);	
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -54,7 +55,7 @@ public class DepartmentController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<DepartmentDTO>>> listDepartments() {
 		ResponseDTO<List<DepartmentDTO>> response = departmentService.listAllDepartment();
-		return new ResponseEntity<ResponseDTO<List<DepartmentDTO>>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<DepartmentDTO>>>(response, HttpStatus.OK);
 	}
 
 }

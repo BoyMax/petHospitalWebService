@@ -19,7 +19,7 @@ import com.petHospital.backend.service.ExamService;
 
 @CrossOrigin(origins = "*", maxAge = 3600,methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 @RestController
-@RequestMapping(path = "/Exam")
+@RequestMapping(path = "/exam")
 public class ExamController{
 
 	@Autowired
@@ -30,31 +30,31 @@ public class ExamController{
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<ExamDTO>> addExam(@RequestBody ExamDTO examDTO) {
 		ResponseDTO<ExamDTO> response = examService.createExam(examDTO);	
-		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, getHttpHeaders(), HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO<ExamDTO>>(response,HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<ExamDTO>> deleteExam(@PathVariable("id") String id) {
 		ResponseDTO<ExamDTO> response = examService.deleteExam(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<ExamDTO>> editExam(@RequestBody ExamDTO examDTO) {
 		ResponseDTO<ExamDTO> response = examService.editExam(examDTO);
-		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, null, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<ExamDTO>> getExam(@PathVariable("id") String id) {
 		ResponseDTO<ExamDTO> response = examService.retreiveExam(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<ExamDTO>>(response, null, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<ExamDTO>>> listAllExam() {
 		ResponseDTO<List<ExamDTO>> response = examService.listAllExam();
-		return new ResponseEntity<ResponseDTO<List<ExamDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<ExamDTO>>>(response, null, HttpStatus.OK);
 	}
 
 }
