@@ -20,7 +20,7 @@ import com.petHospital.backend.service.ExamService;
 @CrossOrigin(origins = "*", maxAge = 3600,methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 @RestController
 @RequestMapping(path = "/Exam")
-public class ExamController extends CommonController {
+public class ExamController{
 
 	@Autowired
 	ExamService examService;
