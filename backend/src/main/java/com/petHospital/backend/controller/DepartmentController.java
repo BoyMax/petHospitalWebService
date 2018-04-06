@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +16,8 @@ import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.DepartmentService;
 
-
 @RestController
 @RequestMapping(path = "/department")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class DepartmentController {
 
 	@Autowired
@@ -37,19 +34,19 @@ public class DepartmentController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> deleteDepartment(@PathVariable("id") String id) {
 		ResponseDTO<DepartmentDTO> response = departmentService.deleteDepartment(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> editDepartment(@RequestBody DepartmentDTO departmentDTO) {
 		ResponseDTO<DepartmentDTO> response = departmentService.editDepartment(departmentDTO);
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<DepartmentDTO>> getDepartment(@PathVariable("id") String id) {
 		ResponseDTO<DepartmentDTO> response = departmentService.retreiveDepartment(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<DepartmentDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

@@ -136,7 +136,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			departmentDTO.setManagers(department.getManagers());
 			departmentsDTOs.add(departmentDTO);
 		}
-		responseDTO.setMessage("status");
+		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(departmentsDTOs);
 		

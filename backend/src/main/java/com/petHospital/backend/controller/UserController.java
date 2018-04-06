@@ -18,7 +18,7 @@ import com.petHospital.backend.service.UserService;
 
 @RestController
 @RequestMapping(path="/user")
-public class UserController extends CommonController{
+public class UserController{
 
 	@Autowired
     UserService userService;// = new UserServiceImpl();
@@ -29,36 +29,36 @@ public class UserController extends CommonController{
     @RequestMapping(value="/add",method=RequestMethod.POST)
     public ResponseEntity<ResponseDTO<UserDTO>> addUser(@RequestBody UserDTO user) {
     		ResponseDTO<UserDTO> response =userService.createUser(user);
-    		return new ResponseEntity<ResponseDTO<UserDTO>>(response,getHttpHeaders(),HttpStatus.CREATED);
+    		return new ResponseEntity<ResponseDTO<UserDTO>>(response, HttpStatus.CREATED);
     }
     
     @RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
     public ResponseEntity<ResponseDTO<UserDTO>> deleteUser(@PathVariable("id") String id) {
     		ResponseDTO<UserDTO> response = userService.deleteUser(Long.parseLong(id));
-    	    return new ResponseEntity<ResponseDTO<UserDTO>>(response,getHttpHeaders(),HttpStatus.OK);
+    	    return new ResponseEntity<ResponseDTO<UserDTO>>(response, HttpStatus.OK);
     }
     
     @RequestMapping(value="/edit",method=RequestMethod.PUT)
     public ResponseEntity<ResponseDTO<UserDTO>> editUser(@RequestBody UserDTO user) {
     		ResponseDTO<UserDTO> response =userService.editUser(user);
-    		return new ResponseEntity<ResponseDTO<UserDTO>>(response,getHttpHeaders(),HttpStatus.OK);
+    		return new ResponseEntity<ResponseDTO<UserDTO>>(response, HttpStatus.OK);
     }
     
     @RequestMapping(value="/{name}",method=RequestMethod.GET)
     public ResponseEntity<ResponseDTO<UserDTO>> getUser(@PathVariable("name") String name) {
     		ResponseDTO<UserDTO> response = userService.retreiveUser(name);
-    	    return new ResponseEntity<ResponseDTO<UserDTO>>(response,getHttpHeaders(),HttpStatus.OK);
+    	    return new ResponseEntity<ResponseDTO<UserDTO>>(response, HttpStatus.OK);
     }
     
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public ResponseEntity<ResponseDTO<UserDTO>> login (@RequestBody UserDTO user) {
     		ResponseDTO<UserDTO> response = userService.validateUser(user.getName(),user.getPassword());
-    		return new ResponseEntity<ResponseDTO<UserDTO>>(response,getHttpHeaders(),HttpStatus.OK);
+    		return new ResponseEntity<ResponseDTO<UserDTO>>(response, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<UserDTO>>> listAllUsers() {
 		ResponseDTO<List<UserDTO>> response = userService.listAllUsers();
-		return new ResponseEntity<ResponseDTO<List<UserDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<UserDTO>>>(response,  HttpStatus.OK);
 	}
 }

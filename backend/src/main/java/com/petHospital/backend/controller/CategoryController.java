@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.petHospital.backend.dao.CategoryRepository;
 import com.petHospital.backend.dto.CategoryDTO;
-import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.CategoryService;
 
 @RestController
 @RequestMapping(path = "/category")
-public class CategoryController extends CommonController {
+public class CategoryController{
 	
 	@Autowired
 	CategoryService categoryService;
@@ -29,31 +28,31 @@ public class CategoryController extends CommonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<CategoryDTO>> addCategory(@RequestBody CategoryDTO categoryDTO) {
 		ResponseDTO<CategoryDTO> response = categoryService.createCategory(categoryDTO);	
-		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, getHttpHeaders(), HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<CategoryDTO>> deleteCategory(@PathVariable("id") String id) {
 		ResponseDTO<CategoryDTO> response = categoryService.deleteCategory(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<CategoryDTO>> editCategory(@RequestBody CategoryDTO categoryDTO) {
 		ResponseDTO<CategoryDTO> response = categoryService.editCategory(categoryDTO);
-		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<CategoryDTO>> getCategory(@PathVariable("id") String id) {
 		ResponseDTO<CategoryDTO> response = categoryService.retreiveCategory(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<CategoryDTO>>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<CategoryDTO>>> listCategorys() {
 		ResponseDTO<List<CategoryDTO>> response = categoryService.listAllCategory();
-		return new ResponseEntity<ResponseDTO<List<CategoryDTO>>>(response, null, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<CategoryDTO>>>(response, HttpStatus.OK);
 	}
 	
 }

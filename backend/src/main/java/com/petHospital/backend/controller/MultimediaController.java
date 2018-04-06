@@ -19,7 +19,7 @@ import com.petHospital.backend.service.MultimediaService;
 
 @RestController
 @RequestMapping(path = "/multimedia")
-public class MultimediaController extends CommonController{
+public class MultimediaController{
 	@Autowired
 	MultimediaService multimediaService;
 	
@@ -34,7 +34,7 @@ public class MultimediaController extends CommonController{
         /*System.out.println(request.getParameter("caseId"));
         System.out.println(request.getParameter("caseType"));*/
         ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 0);
-        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, HttpStatus.OK);
 	}
 	
 	//上传视频api
@@ -48,6 +48,6 @@ public class MultimediaController extends CommonController{
         /*System.out.println(request.getParameter("caseId"));
         System.out.println(request.getParameter("caseType"));*/
         ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 1);
-        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, HttpStatus.OK);
 	}
 }
