@@ -25,7 +25,7 @@ public class VaccineServiceImpl implements VaccineService{
 		ResponseDTO<VaccineDTO> responseDTO = new ResponseDTO<VaccineDTO>();
 		Vaccine vaccine = new Vaccine();
 		VaccineDTO vaccineDTO = new VaccineDTO();
-		try {
+//		try {
 			vaccine = vaccineRepository.findOne(id);
 			if (vaccine == null) {
 				responseDTO.setMessage("Vaccine "+id.toString()+" does not exist.");
@@ -43,10 +43,10 @@ public class VaccineServiceImpl implements VaccineService{
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(vaccineDTO);
-		} catch (Exception e) {
-			responseDTO.setMessage("failed");
-			responseDTO.setStatus(e.getMessage());
-		}
+//		} catch (Exception e) {
+//			responseDTO.setMessage("failed");
+//			responseDTO.setStatus(e.getMessage());
+//		}
 		return responseDTO;
 	}
 
@@ -58,10 +58,10 @@ public class VaccineServiceImpl implements VaccineService{
 		vaccine.setPrice(vaccineDTO.getPrice());
 		vaccine.setProductionDate(vaccineDTO.getProductionDate());
 		vaccine.setExpirationDate(vaccineDTO.getExpirationDate());
-		if(validateVaccine(vaccineDTO, vaccine, responseDTO) == false) {
+		if(validateIllness(vaccineDTO, vaccine, responseDTO) == false) {
 			return responseDTO;
 		}
-		try {
+//		try {
 			vaccine = vaccineRepository.save(vaccine);
 			vaccineDTO.setId(vaccine.getId());
 			vaccineDTO.setDescription(vaccine.getDescription());
@@ -73,10 +73,10 @@ public class VaccineServiceImpl implements VaccineService{
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(vaccineDTO);
-		}catch(Exception e){
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-		}
+//		}catch(Exception e){
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//		}
 		return responseDTO;
 	}
 
@@ -84,50 +84,50 @@ public class VaccineServiceImpl implements VaccineService{
 		ResponseDTO<VaccineDTO> responseDTO = new ResponseDTO<VaccineDTO>();
 		VaccineDTO vaccineDTO = new VaccineDTO();
 		Vaccine vaccine;
-		try {
+//		try {
 			vaccine = vaccineRepository.findOne(id);
-		}catch (Exception e) {
-			responseDTO.setMessage("Cannot find medicine with "+id.toString()+ e.getMessage());
-			responseDTO.setStatus("failed");
-			return responseDTO;
-		}
+//		}catch (Exception e) {
+//			responseDTO.setMessage("Cannot find medicine with "+id.toString()+ e.getMessage());
+//			responseDTO.setStatus("failed");
+//			return responseDTO;
+//		}
 		if(vaccine == null) {
 			responseDTO.setMessage("Department "+id+" does not exist");
 			responseDTO.setStatus("failed");
 			return responseDTO;
 		}
-		try {
+//		try {
 			vaccineRepository.delete(id);
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			vaccineDTO.setId(id);
 			responseDTO.setData(vaccineDTO);
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
 	public ResponseDTO<VaccineDTO> editVaccine(VaccineDTO vaccineDTO) {
 		ResponseDTO<VaccineDTO> responseDTO = new ResponseDTO<VaccineDTO>();
 		Vaccine vaccine;
-		try {
+//		try {
 			vaccine = vaccineRepository.findOne(vaccineDTO.getId());
-		}catch (Exception e) {
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-			return responseDTO;
-		}
+//		}catch (Exception e) {
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//			return responseDTO;
+//		}
 		vaccine.setName(vaccineDTO.getName());
 		vaccine.setDescription(vaccineDTO.getDescription());
 		vaccine.setPrice(vaccineDTO.getPrice());
 		vaccine.setProductionDate(vaccineDTO.getProductionDate());
 		vaccine.setExpirationDate(vaccineDTO.getExpirationDate());
-		if(validateVaccine(vaccineDTO,vaccine,responseDTO) == false) {
+		if(validateIllness(vaccineDTO,vaccine,responseDTO) == false) {
 			return responseDTO;
 		}
-		try {
+//		try {
 			vaccineRepository.save(vaccine);
 			vaccineDTO.setId(vaccine.getId());
 			vaccineDTO.setDescription(vaccine.getDescription());
@@ -139,10 +139,10 @@ public class VaccineServiceImpl implements VaccineService{
 			responseDTO.setData(vaccineDTO);
 			responseDTO.setStatus("success");
 			responseDTO.setMessage("success");
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -152,25 +152,27 @@ public class VaccineServiceImpl implements VaccineService{
 		ResponseDTO<List<VaccineDTO>> responseDTO = new ResponseDTO<List<VaccineDTO>>();
 		ArrayList<VaccineDTO> vaccineDTOs = new ArrayList<VaccineDTO>();
 		List<Vaccine> vaccines = new ArrayList<Vaccine>();
-		try {
+//		try {
 			vaccines = (List<Vaccine>) vaccineRepository.findAll();
-		} catch (Exception e) {
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-			return responseDTO;
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
+		if (!vaccines.isEmpty()) {
+			for (Vaccine vaccine : vaccines) {
+				VaccineDTO vaccineDTO = new VaccineDTO();
+				vaccineDTO.setId(vaccine.getId());
+				vaccineDTO.setDescription(vaccine.getDescription());
+				vaccineDTO.setName(vaccine.getName());
+				vaccineDTO.setPrice(vaccine.getPrice());
+				vaccineDTO.setProductionDate(vaccine.getProductionDate());
+				vaccineDTO.setExpirationDate(vaccine.getExpirationDate());
+				vaccineDTO.setIllness(vaccine.getIllness());
+				vaccineDTOs.add(vaccineDTO);
+			}
 		}
-		for (Vaccine vaccine : vaccines) {
-			VaccineDTO vaccineDTO = new VaccineDTO();
-			vaccineDTO.setId(vaccine.getId());
-			vaccineDTO.setDescription(vaccine.getDescription());
-			vaccineDTO.setName(vaccine.getName());
-			vaccineDTO.setPrice(vaccine.getPrice());
-			vaccineDTO.setProductionDate(vaccine.getProductionDate());
-			vaccineDTO.setExpirationDate(vaccine.getExpirationDate());
-			vaccineDTO.setIllness(vaccine.getIllness());
-			vaccineDTOs.add(vaccineDTO);
-		}
-		responseDTO.setMessage("status");
+		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(vaccineDTOs);
 		
@@ -178,15 +180,15 @@ public class VaccineServiceImpl implements VaccineService{
 	}
 	
 	
-	private boolean validateVaccine(VaccineDTO vaccineDTO, Vaccine vaccine, ResponseDTO<VaccineDTO> responseDTO) {
+	private boolean validateIllness(VaccineDTO vaccineDTO, Vaccine vaccine, ResponseDTO<VaccineDTO> responseDTO) {
 		Illness illness = vaccineDTO.getIllness();
 		if(illness != null && illness.getId() != null) {
-			try {
+//			try {
 				illness = illnessRepository.findOne(illness.getId());
-			}catch (Exception e) {
-				responseDTO.setStatus("failed");
-				responseDTO.setMessage(e.getMessage());
-			}
+//			}catch (Exception e) {
+//				responseDTO.setStatus("failed");
+//				responseDTO.setMessage(e.getMessage());
+//			}
 			vaccine.setIllness(illness);		
 		}
 		return true;

@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.petHospital.backend.controller.VaccineController;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.dto.VaccineDTO;
+import com.petHospital.backend.model.Illness;
 
 
 @RunWith(SpringRunner.class)
@@ -27,6 +28,7 @@ public class VaccineTest
 {
 	String existId = "2";
 	String notExistId = "1";
+	Long illnessId = 1L;
 	
 	@Autowired
     private VaccineController vaccineController;
@@ -83,6 +85,9 @@ public class VaccineTest
 		VaccineDTO.setPrice(88.9);
 		VaccineDTO.setProductionDate(Date.valueOf("2018-01-01"));
 		VaccineDTO.setExpirationDate(Date.valueOf("2018-12-31"));
+		Illness illness = new Illness();
+		illness.setId(illnessId);
+		VaccineDTO.setIllness(illness);
 		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity = vaccineController.addVaccine(VaccineDTO);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
     }
@@ -93,5 +98,8 @@ public class VaccineTest
     public void testDeleteVaccine() {
 		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity = vaccineController.deleteVaccine(existId);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity2 = vaccineController.deleteVaccine(notExistId);
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
 }

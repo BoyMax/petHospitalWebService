@@ -112,5 +112,8 @@ public class DepartmentTest
     public void testDeleteDepartment() {
 		ResponseEntity<ResponseDTO<DepartmentDTO>> responseEntity = departmentController.deleteDepartment(existId);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+		ResponseEntity<ResponseDTO<DepartmentDTO>> responseEntity2 = departmentController.deleteDepartment(notExistId);
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
 }

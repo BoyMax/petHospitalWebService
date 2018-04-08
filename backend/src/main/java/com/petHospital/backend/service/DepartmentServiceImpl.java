@@ -26,17 +26,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 		ResponseDTO<DepartmentDTO> responseDTO = new ResponseDTO<DepartmentDTO>();
 		Department department = new Department();
 		DepartmentDTO departmentDTO = new DepartmentDTO();
-		try {
+//		try {
 			department = departmentRepository.findOne(id);
 			if (department == null) {
 				responseDTO.setMessage("Department"+id+"does not exist.");
 				responseDTO.setStatus("failed");
 				return responseDTO;
 			}
-		}catch(Exception e) {
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e) {
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		departmentDTO.setId(department.getId());
 		departmentDTO.setName(department.getName());
 		departmentDTO.setDescription(department.getDescription());
@@ -55,7 +55,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		if(validateManagers(departmentDTO,department,responseDTO) == false) {
 			return responseDTO;
 		}
-		try {
+//		try {
 			department = departmentRepository.save(department);
 			departmentDTO.setId(department.getId());
 			departmentDTO.setName(department.getName());
@@ -64,10 +64,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 			responseDTO.setStatus("success");
 			responseDTO.setMessage("success");
 			responseDTO.setData(departmentDTO);
-		}catch(Exception e){
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-		}
+//		}catch(Exception e){
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//		}
 		return responseDTO;
 	}
 	
@@ -80,15 +80,15 @@ public class DepartmentServiceImpl implements DepartmentService {
 			responseDTO.setStatus("failed");
 			return responseDTO;
 		}
-		try {
+//		try {
 			departmentRepository.delete(id);
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(departmentDTO);
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -100,7 +100,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		if(validateManagers(departmentDTO,department,responseDTO) == false) {
 			return responseDTO;
 		}
-		try {
+//		try {
 			departmentRepository.save(department);
 			departmentDTO.setId(department.getId());
 			departmentDTO.setName(department.getName());
@@ -109,10 +109,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 			responseDTO.setMessage("success");
 			responseDTO.setData(departmentDTO);
 			responseDTO.setStatus("success");
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -121,20 +121,22 @@ public class DepartmentServiceImpl implements DepartmentService {
 		ResponseDTO<List<DepartmentDTO>> responseDTO = new ResponseDTO<List<DepartmentDTO>>();
 		ArrayList<DepartmentDTO> departmentsDTOs = new ArrayList<DepartmentDTO>();
 		List<Department> departments = new ArrayList<Department>();
-		try {
+//		try {
 			departments = (List<Department>) departmentRepository.findAll();
-		} catch (Exception e) {
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-			return responseDTO;
-		}
-		for (Department department : departments) {
-			DepartmentDTO departmentDTO = new DepartmentDTO();
-			departmentDTO.setId(department.getId());
-			departmentDTO.setName(department.getName());
-			departmentDTO.setDescription(department.getDescription());
-			departmentDTO.setManagers(department.getManagers());
-			departmentsDTOs.add(departmentDTO);
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
+		if (!departments.isEmpty()) {
+			for (Department department : departments) {
+				DepartmentDTO departmentDTO = new DepartmentDTO();
+				departmentDTO.setId(department.getId());
+				departmentDTO.setName(department.getName());
+				departmentDTO.setDescription(department.getDescription());
+				departmentDTO.setManagers(department.getManagers());
+				departmentsDTOs.add(departmentDTO);
+			}
 		}
 		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");

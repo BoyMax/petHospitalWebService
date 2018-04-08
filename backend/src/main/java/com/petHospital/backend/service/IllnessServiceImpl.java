@@ -1,7 +1,6 @@
 package com.petHospital.backend.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,12 @@ import com.petHospital.backend.dao.IllnessRepository;
 import com.petHospital.backend.dao.MedicineRepository;
 import com.petHospital.backend.dao.MultimediaRepository;
 import com.petHospital.backend.dao.VaccineRepository;
-import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.IllnessDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.model.Category;
-import com.petHospital.backend.model.Department;
 import com.petHospital.backend.model.Illness;
 import com.petHospital.backend.model.Medicine;
 import com.petHospital.backend.model.Multimedia;
-import com.petHospital.backend.model.User;
 import com.petHospital.backend.model.Vaccine;
 
 @Service
@@ -212,18 +208,20 @@ public class IllnessServiceImpl implements IllnessService {
 		//medicine
 		List<Medicine> medicines = illnessDTO.getMedicines();
 		List<Medicine> medicineEntity = new ArrayList<Medicine>();
-		for(Medicine medicine : medicines) {
-			if(medicine != null) {
-				try {
-					medicine=medicineRepository.findOne(medicine.getId());
-					
-				}catch (Exception e) {
-					responseDTO.setError_code("404");
-					responseDTO.setStatus("failed");
-					responseDTO.setMessage("medicine does not exist who's id =" + medicine.getId().toString());
-					return false;
+		if (medicines != null) {
+			for (Medicine medicine : medicines) {
+				if (medicine != null) {
+					try {
+						medicine = medicineRepository.findOne(medicine.getId());
+
+					} catch (Exception e) {
+						responseDTO.setError_code("404");
+						responseDTO.setStatus("failed");
+						responseDTO.setMessage("medicine does not exist who's id =" + medicine.getId().toString());
+						return false;
+					}
+					medicineEntity.add(medicine);
 				}
-				medicineEntity.add(medicine);
 			}
 		}
 		illness.setMedicines(medicineEntity);
@@ -231,17 +229,19 @@ public class IllnessServiceImpl implements IllnessService {
 		//multi_media
 		List<Multimedia> multimedias = illnessDTO.getMultimedias();
 		List<Multimedia> multimediasEntity = new ArrayList<Multimedia>();
-		for(Multimedia multimedia : multimedias) {
-			if(multimedia != null && multimedia.getId() != null) {
-				try {
-					multimedia=multimediaRepository.findOne(multimedia.getId());				
-				}catch (Exception e) {
-					responseDTO.setError_code("404");
-					responseDTO.setStatus("failed");
-					responseDTO.setMessage("multimedia does not exist who's id =" + multimedia.getId().toString());
-					return false;
+		if (multimedias != null) {
+			for (Multimedia multimedia : multimedias) {
+				if (multimedia != null && multimedia.getId() != null) {
+					try {
+						multimedia = multimediaRepository.findOne(multimedia.getId());
+					} catch (Exception e) {
+						responseDTO.setError_code("404");
+						responseDTO.setStatus("failed");
+						responseDTO.setMessage("multimedia does not exist who's id =" + multimedia.getId().toString());
+						return false;
+					}
+					multimediasEntity.add(multimedia);
 				}
-				multimediasEntity.add(multimedia);
 			}
 		}
 		illness.setMultimedias(multimediasEntity);
@@ -249,27 +249,23 @@ public class IllnessServiceImpl implements IllnessService {
 		//vaccine
 		List<Vaccine> vaccines = illnessDTO.getVaccines(); 
 		List<Vaccine> vaccinesEntity = new ArrayList<Vaccine>();
-		for(Vaccine vaccine : vaccines) {
-			if(vaccine != null && vaccine.getId() != null) {
-				try {
-					vaccine=vaccineRepository.findOne(vaccine.getId());				
-				}catch (Exception e) {
-					responseDTO.setError_code("404");
-					responseDTO.setStatus("failed");
-					responseDTO.setMessage("vaccine does not exist who's id =" + vaccine.getId().toString());
-					return false;
+		if (vaccines != null) {
+			for (Vaccine vaccine : vaccines) {
+				if (vaccine != null && vaccine.getId() != null) {
+					try {
+						vaccine = vaccineRepository.findOne(vaccine.getId());
+					} catch (Exception e) {
+						responseDTO.setError_code("404");
+						responseDTO.setStatus("failed");
+						responseDTO.setMessage("vaccine does not exist who's id =" + vaccine.getId().toString());
+						return false;
+					}
+					vaccinesEntity.add(vaccine);
 				}
-				vaccinesEntity.add(vaccine);
 			}
 		}
 		illness.setVaccines(vaccinesEntity);
-		
-		
-		
-		
 		return true;
-		
-		
 	} 
 	
 }
