@@ -7,12 +7,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.junit.runner.RunWith;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.petHospital.backend.controller.QuestionController;
 import com.petHospital.backend.dto.QuestionDTO;
@@ -39,7 +37,7 @@ public class QuestionTest
         assertThat(questionController).isNotNull();
     }
  
-//    @Test
+    @Test
     @Transactional  
     @Rollback(true)
     public void testListDepartment()
@@ -48,7 +46,7 @@ public class QuestionTest
         assertTrue( responseEntity.getBody().getData().size() >= 0 );
     }
     
-//    @Test
+    @Test
     @Transactional  
     @Rollback(true)
     public void testGetQuestion()
@@ -61,7 +59,7 @@ public class QuestionTest
         assertTrue( responseEntity2.getBody().getStatus() == "success" );
     }
     
-//    @Test
+    @Test
     @Transactional  
     @Rollback(true)
     public void testlistQuestionByCategory()
@@ -111,7 +109,7 @@ public class QuestionTest
         
     }
     
-//    @Test
+    @Test
     @Transactional  
     @Rollback(true)
     public void testAddQuestion() {
@@ -128,7 +126,7 @@ public class QuestionTest
 		assertTrue(responseEntity.getBody().getStatus() == "success" );
     }
     
-//    @Test
+    @Test
     @Transactional  
     @Rollback(true)
     public void testDeleteQuestion() {
