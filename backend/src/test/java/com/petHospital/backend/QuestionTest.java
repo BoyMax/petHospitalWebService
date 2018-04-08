@@ -28,8 +28,8 @@ public class QuestionTest
 	//分支覆盖条件
 	String existId = "1";
 	String notExistId = "100";
-//	Long managerId = 1L;
-//	Long managerNotExistId = 2L;
+	Long categoryId = (long) 1;
+	Long categoryNotExistId = (long) 100;
 	
 	@Autowired
     private QuestionController questionController;
@@ -54,7 +54,7 @@ public class QuestionTest
     public void testGetQuestion()
     {
     	    //id not in db
-    		ResponseEntity<ResponseDTO<QuestionDTO>> responseEntity1 =questionController.getQuestion(notExistId);
+		ResponseEntity<ResponseDTO<QuestionDTO>> responseEntity1 =questionController.getQuestion(notExistId);
         assertTrue( responseEntity1.getBody().getStatus() == "failed" );
     	    //id is in db
     		ResponseEntity<ResponseDTO<QuestionDTO>> responseEntity2 = questionController.getQuestion(existId);
@@ -62,6 +62,20 @@ public class QuestionTest
     }
     
 //    @Test
+    @Transactional  
+    @Rollback(true)
+    public void testlistQuestionByCategory()
+    {
+    	    //id not in db
+		ResponseEntity<ResponseDTO<List<QuestionDTO>>> responseEntity1 =questionController.listQuestionByCategory(categoryNotExistId);
+        assertTrue( responseEntity1.getBody().getStatus() == "failed" );
+    	    //id is in db
+    	ResponseEntity<ResponseDTO<List<QuestionDTO>>> responseEntity2 = questionController.listQuestionByCategory(categoryId);
+        assertTrue( responseEntity2.getBody().getStatus() == "success" );
+    }
+    
+    
+    @Test
     @Transactional  
     @Rollback(true)
     public void testEditQuestion(){
@@ -120,5 +134,8 @@ public class QuestionTest
     public void testDeleteQuestion() {
 		ResponseEntity<ResponseDTO<QuestionDTO>> responseEntity = questionController.deleteQuestion(existId);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+		ResponseEntity<ResponseDTO<QuestionDTO>> responseEntity2 = questionController.deleteQuestion(notExistId);
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
 }

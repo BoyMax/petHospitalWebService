@@ -7,10 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.petHospital.backend.dao.CategoryRepository;
 import com.petHospital.backend.dao.QuestionRepository;
 import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
+import com.petHospital.backend.model.Category;
 import com.petHospital.backend.model.Department;
 import com.petHospital.backend.model.Question;
 import com.petHospital.backend.model.User;
@@ -20,23 +22,26 @@ public class QuestionServiceImpl implements QuestionService {
 
 	 @Autowired
 	 QuestionRepository questionRepository;
+	 //
+	 @Autowired
+	 CategoryRepository categoryRepository;
 	 
 	 
 	 public ResponseDTO<QuestionDTO> retreiveQuestion(Long id) {
 		ResponseDTO<QuestionDTO> responseDTO = new ResponseDTO<QuestionDTO>();
 		Question question = new Question();
 		QuestionDTO questionDTO = new QuestionDTO();
-		try {
+//		try {
 			question = questionRepository.findOne(id);
 			if (question == null) {
 				responseDTO.setMessage("Question"+id+"does not exist.");
 				responseDTO.setStatus("failed");
 				return responseDTO;
 			}
-		}catch(Exception e) {
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e) {
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		questionDTO.setId(question.getId());
 		questionDTO.setCategory(question.getCategory());
 		questionDTO.setUserType(question.getUserType());
@@ -67,7 +72,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.setCategory(questionDTO.getCategory());
 		question.setUserType(questionDTO.getUserType());
 		question.setQuestionType(questionDTO.getQuestionType());
-		try {
+//		try {
 			question = questionRepository.save(question);
 			questionDTO.setId(question.getId());
 			questionDTO.setCategory(question.getCategory());
@@ -83,10 +88,10 @@ public class QuestionServiceImpl implements QuestionService {
 			responseDTO.setStatus("success");
 			responseDTO.setMessage("success");
 			responseDTO.setData(questionDTO);
-		}catch(Exception e){
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-		}
+//		}catch(Exception e){
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//		}
 		return responseDTO;
 	}
 	
@@ -99,15 +104,15 @@ public class QuestionServiceImpl implements QuestionService {
 			responseDTO.setStatus("failed");
 			return responseDTO;
 		}
-		try {
+//		try {
 			questionRepository.delete(id);
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(questionDTO);
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -130,7 +135,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.setCategory(questionDTO.getCategory());
 		question.setUserType(questionDTO.getUserType());
 		question.setQuestionType(questionDTO.getQuestionType());
-		try {
+//		try {
 			question = questionRepository.save(question);
 			questionDTO.setId(question.getId());
 			questionDTO.setCategory(question.getCategory());
@@ -147,10 +152,10 @@ public class QuestionServiceImpl implements QuestionService {
 			responseDTO.setMessage("success");
 			responseDTO.setData(questionDTO);
 			responseDTO.setStatus("success");
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -159,13 +164,13 @@ public class QuestionServiceImpl implements QuestionService {
 		ResponseDTO<List<QuestionDTO>> responseDTO = new ResponseDTO<List<QuestionDTO>>();
 		ArrayList<QuestionDTO> questionDTOs = new ArrayList<QuestionDTO>();
 		List<Question> question = new ArrayList<Question>();
-		try {
+//		try {
 			question = (List<Question>) questionRepository.findAll();
-		} catch (Exception e) {
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-			return responseDTO;
-		}
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
 		for (Question question1 : question) {
 			QuestionDTO questionDTO = new QuestionDTO();
 			questionDTO.setId(question1.getId());
@@ -190,12 +195,25 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	
-	public ResponseDTO<List<QuestionDTO>> listQuestionByCategory(Long catagoryId) {
+	public ResponseDTO<List<QuestionDTO>> listQuestionByCategory(Long categoryId) {
 		ResponseDTO<List<QuestionDTO>> responseDTO = new ResponseDTO<List<QuestionDTO>>();
 		ArrayList<QuestionDTO> questionDTOs = new ArrayList<QuestionDTO>();
 		List<Question> question = new ArrayList<Question>();
+		
+		
+		//检查categoryId是否存在（显示正确）
+		if(categoryRepository.findOne(categoryId)==null) {
+			responseDTO.setError_code("404");
+			responseDTO.setStatus("failed");
+			responseDTO.setMessage("category does not exist who's id =" + categoryId);
+			return responseDTO;
+		}
+		
+		
+		
+	
 		try {
-			question = (List<Question>) questionRepository.getQuestionsByCatagory(catagoryId);
+			question = (List<Question>) questionRepository.listQuestionsByCategory(categoryId);
 		} catch (Exception e) {
 			responseDTO.setStatus("failed");
 			responseDTO.setMessage(e.getMessage());
@@ -238,4 +256,5 @@ public class QuestionServiceImpl implements QuestionService {
 		question.setId(id);
 		return true;
 	}
+
 }

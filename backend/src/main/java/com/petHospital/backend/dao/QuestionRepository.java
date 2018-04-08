@@ -11,6 +11,6 @@ import com.petHospital.backend.model.Question;
 public interface QuestionRepository extends CrudRepository<Question, Long>{
 
 	@Query(value = "select q from Question q JOIN q.category c where c.id=:id")  
-    List<Question> getQuestionsByCatagory(@Param("id") Long id);  
+    List<Question> listQuestionsByCategory(@Param("id") Long categoryId);
 }
 

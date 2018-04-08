@@ -56,8 +56,8 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/getByCategory/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseDTO<List<QuestionDTO>>> listQuestionByCategory(@PathVariable("id") String id) {
-		ResponseDTO<List<QuestionDTO>> response = questionService.listQuestionByCategory(Long.parseLong(id));
+	public ResponseEntity<ResponseDTO<List<QuestionDTO>>> listQuestionByCategory(@PathVariable("id") Long id) {
+		ResponseDTO<List<QuestionDTO>> response = questionService.listQuestionByCategory(id);
 		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response,  HttpStatus.OK);
 	}
 

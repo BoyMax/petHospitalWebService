@@ -11,7 +11,7 @@ public interface QuestionService {
 	public ResponseDTO<QuestionDTO> deleteQuestion(Long id);
 	public ResponseDTO<QuestionDTO> editQuestion(QuestionDTO user);
 	public ResponseDTO<List<QuestionDTO>> listAllQuestion();
-	public ResponseDTO<List<QuestionDTO>> listQuestionByCategory(Long catagoryId);
+	public ResponseDTO<List<QuestionDTO>> listQuestionByCategory(Long id);
 
 }
 
