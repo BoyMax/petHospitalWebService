@@ -26,7 +26,7 @@ public class MedicineServiceImpl implements MedicineService{
 		ResponseDTO<MedicineDTO> responseDTO = new ResponseDTO<MedicineDTO>();
 		Medicine medicine = new Medicine();
 		MedicineDTO medicineDTO = new MedicineDTO();
-		try {
+//		try {
 			medicine = medicineRepository.findOne(id);
 			if (medicine == null) {
 				responseDTO.setMessage("Medicine "+id.toString()+" does not exist.");
@@ -44,10 +44,10 @@ public class MedicineServiceImpl implements MedicineService{
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(medicineDTO);
-		} catch (Exception e) {
-			responseDTO.setMessage("failed");
-			responseDTO.setStatus(e.getMessage());
-		}
+//		} catch (Exception e) {
+//			responseDTO.setMessage("failed");
+//			responseDTO.setStatus(e.getMessage());
+//		}
 		return responseDTO;
 	}
 
@@ -62,7 +62,7 @@ public class MedicineServiceImpl implements MedicineService{
 		if(validateIllnesses(medicineDTO, medicine, responseDTO) == false) {
 			return responseDTO;
 		}
-		try {
+//		try {
 			medicine = medicineRepository.save(medicine);
 			medicineDTO.setId(medicine.getId());
 			medicineDTO.setDescription(medicine.getDescription());
@@ -74,36 +74,36 @@ public class MedicineServiceImpl implements MedicineService{
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(medicineDTO);
-		}catch(Exception e){
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-		}
+//		}catch(Exception e){
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//		}
 		return responseDTO;
 	}
 
 	public ResponseDTO<MedicineDTO> deleteMedicine(Long id) {
 		ResponseDTO<MedicineDTO> responseDTO = new ResponseDTO<MedicineDTO>();
 		Medicine medicine;
-		try {
+//		try {
 			medicine = medicineRepository.findOne(id);
-		}catch (Exception e) {
-			responseDTO.setMessage("Cannot find medicine with "+id.toString()+ e.getMessage());
-			responseDTO.setStatus("failed");
-			return responseDTO;
-		}
+//		}catch (Exception e) {
+//			responseDTO.setMessage("Cannot find medicine with "+id.toString()+ e.getMessage());
+//			responseDTO.setStatus("failed");
+//			return responseDTO;
+//		}
 		if(medicine == null) {
 			responseDTO.setMessage("Department "+id+" does not exist");
 			responseDTO.setStatus("failed");
 			return responseDTO;
 		}
-		try {
+//		try {
 			medicineRepository.delete(id);
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -118,7 +118,7 @@ public class MedicineServiceImpl implements MedicineService{
 		if(validateIllnesses(medicineDTO,medicine,responseDTO) == false) {
 			return responseDTO;
 		}
-		try {
+//		try {
 			medicineRepository.save(medicine);
 			medicineDTO.setId(medicine.getId());
 			medicineDTO.setDescription(medicine.getDescription());
@@ -130,10 +130,10 @@ public class MedicineServiceImpl implements MedicineService{
 			responseDTO.setData(medicineDTO);
 			responseDTO.setStatus("success");
 			responseDTO.setMessage("success");
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -141,13 +141,13 @@ public class MedicineServiceImpl implements MedicineService{
 		ResponseDTO<List<MedicineDTO>> responseDTO = new ResponseDTO<List<MedicineDTO>>();
 		ArrayList<MedicineDTO> medicineDTOs = new ArrayList<MedicineDTO>();
 		List<Medicine> medicines = new ArrayList<Medicine>();
-		try {
+//		try {
 			medicines = (List<Medicine>) medicineRepository.findAll();
-		} catch (Exception e) {
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-			return responseDTO;
-		}
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
 		for (Medicine medicine : medicines) {
 			MedicineDTO medicineDTO = new MedicineDTO();
 			medicineDTO.setId(medicine.getId());

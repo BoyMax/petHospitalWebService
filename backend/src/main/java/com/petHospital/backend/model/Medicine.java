@@ -3,7 +3,6 @@ package com.petHospital.backend.model;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +26,7 @@ public class Medicine {
 	
 	private Date expirationDate;
 	
-	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},mappedBy="medicines")
+	@ManyToMany(mappedBy="medicines")
     private List<Illness> illnesses;
 	
 	public Long getId() {

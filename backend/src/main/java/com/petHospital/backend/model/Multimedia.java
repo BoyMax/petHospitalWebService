@@ -2,7 +2,6 @@ package com.petHospital.backend.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +26,7 @@ public class Multimedia {
 	*/
 	private int caseType;
 
-	@ManyToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},mappedBy="multimedias")
+	@ManyToMany(mappedBy="multimedias")
     private List<Illness> illnesses;
     
 	public List<Illness> getIllnesses() {
