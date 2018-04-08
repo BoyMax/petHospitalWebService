@@ -1,15 +1,19 @@
 package com.petHospital.backend.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petHospital.backend.dao.QuestionRepository;
+import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
+import com.petHospital.backend.model.Department;
 import com.petHospital.backend.model.Question;
+import com.petHospital.backend.model.User;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -109,8 +113,13 @@ public class QuestionServiceImpl implements QuestionService {
 
 	public ResponseDTO<QuestionDTO> editQuestion(QuestionDTO questionDTO) {
 		ResponseDTO<QuestionDTO> responseDTO = new ResponseDTO<QuestionDTO>();
-		Question question = questionRepository.findOne(questionDTO.getId());
 		
+		Question question = questionRepository.findOne(questionDTO.getId());
+
+
+		if(validateEditIds(questionDTO,question,responseDTO) == false) {
+			return responseDTO;
+		}
 		question.setAskDescription(questionDTO.getAskDescription());
 		question.setAdescription(questionDTO.getAdescription());
 		question.setBdescription(questionDTO.getBdescription());
@@ -212,5 +221,21 @@ public class QuestionServiceImpl implements QuestionService {
 		responseDTO.setData(questionDTOs);
 		
 		return responseDTO;
+	}
+	private boolean validateEditIds(QuestionDTO questionDTO, Question question, ResponseDTO<QuestionDTO> responseDTO) {
+		Long id = questionDTO.getId();
+
+		if (id!= 0) {
+                Question questiontest=new Question();
+				questiontest = questionRepository.findOne(id);
+				if (questiontest == null) {
+					responseDTO.setError_code("404");
+					responseDTO.setStatus("failed");
+					responseDTO.setMessage("question does not exist who's id =" + id);
+					return false;
+		}
+	}
+		question.setId(id);
+		return true;
 	}
 }
