@@ -18,7 +18,7 @@ import com.petHospital.backend.service.QuestionService;
 
 @RestController
 @RequestMapping(path = "/question")
-public class QuestionController extends CommonController {
+public class QuestionController {
 
 	@Autowired
 	QuestionService questionService;
@@ -28,37 +28,38 @@ public class QuestionController extends CommonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<QuestionDTO>> addQuestion(@RequestBody QuestionDTO questionDTO) {
 		ResponseDTO<QuestionDTO> response = questionService.createQuestion(questionDTO);	
-		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response, getHttpHeaders(), HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response,  HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<QuestionDTO>> deleteQuestion(@PathVariable("id") String id) {
 		ResponseDTO<QuestionDTO> response = questionService.deleteQuestion(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response,  HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<QuestionDTO>> editQuestion(@RequestBody QuestionDTO questionDTO) {
 		ResponseDTO<QuestionDTO> response = questionService.editQuestion(questionDTO);
-		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response,  HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<QuestionDTO>> getQuestion(@PathVariable("id") String id) {
 		ResponseDTO<QuestionDTO> response = questionService.retreiveQuestion(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<QuestionDTO>>(response,  HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<QuestionDTO>>> listAllQuestion() {
 		ResponseDTO<List<QuestionDTO>> response = questionService.listAllQuestion();
-		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response,  HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getByCategory/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<QuestionDTO>>> listQuestionByCategory(@PathVariable("id") String id) {
 		ResponseDTO<List<QuestionDTO>> response = questionService.listQuestionByCategory(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response,  HttpStatus.OK);
 	}
-	
+
+
 }

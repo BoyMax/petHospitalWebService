@@ -19,18 +19,35 @@ import com.petHospital.backend.service.MultimediaService;
 
 @RestController
 @RequestMapping(path = "/multimedia")
-public class MultimediaController extends CommonController{
+public class MultimediaController{
 	@Autowired
 	MultimediaService multimediaService;
 	
+	//上传图片api
 	@RequestMapping(value = "/uploader", method = RequestMethod.POST)
     public ResponseEntity<ResponseDTO<List<MultimediaDTO>>> upload(HttpServletRequest request){
         MultipartHttpServletRequest Murequest = (MultipartHttpServletRequest)request;
         Map<String, MultipartFile> files = Murequest.getFileMap();//得到文件map对象
-        String upaloadUrl = "/root/user/multiMedia/img/";//得到当前工程路径拼接上文件名
-        /*System.out.println(request.getParameter("caseType"));
-        System.out.println(request.getParameter("caseId"));*/
-        ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl);
-        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+        String upaloadUrl = "/home/images/";//得到当前工程路径拼接上文件名
+        int caseType = Integer.valueOf(request.getParameter("caseType"));
+        long caseId = Long.valueOf(request.getParameter("caseId"));
+        /*System.out.println(request.getParameter("caseId"));
+        System.out.println(request.getParameter("caseType"));*/
+        ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 0);
+        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, HttpStatus.OK);
+	}
+	
+	//上传视频api
+	@RequestMapping(value = "/uploaderVideo", method = RequestMethod.POST)
+    public ResponseEntity<ResponseDTO<List<MultimediaDTO>>> uploadVideo(HttpServletRequest request){
+        MultipartHttpServletRequest Murequest = (MultipartHttpServletRequest)request;
+        Map<String, MultipartFile> files = Murequest.getFileMap();//得到文件map对象
+        String upaloadUrl = "/home/videos/";//得到当前工程路径拼接上文件名
+        int caseType = Integer.valueOf(request.getParameter("caseType"));
+        long caseId = Long.valueOf(request.getParameter("caseId"));
+        /*System.out.println(request.getParameter("caseId"));
+        System.out.println(request.getParameter("caseType"));*/
+        ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 1);
+        return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, HttpStatus.OK);
 	}
 }

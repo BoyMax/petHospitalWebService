@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
 			responseDTO.setError_code("404");
 			return responseDTO;
 		}
-		else if(user.getPassword().equals(password)) {
+		else if(!user.getPassword().equals(password)) {
 			responseDTO.setMessage("password is not correct.");
 			responseDTO.setStatus("failed");
 			return responseDTO;
@@ -160,11 +160,13 @@ public class UserServiceImpl implements UserService {
 		try {
 			user = userRepository.save(user);
 			userDTO.setId(user.getId());
-			DepartmentDTO departmentDTO = new DepartmentDTO();
-			departmentDTO.setId(department.getId());
-			departmentDTO.setName(department.getName());
-			departmentDTO.setDescription(department.getDescription());
-			userDTO.setDepartment(departmentDTO);
+			if(user.getDepartment() != null) {
+				DepartmentDTO departmentDTO = new DepartmentDTO();
+				departmentDTO.setId(department.getId());
+				departmentDTO.setName(department.getName());
+				departmentDTO.setDescription(department.getDescription());
+				userDTO.setDepartment(departmentDTO);
+			}
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(userDTO);

@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Exam {
 	
@@ -24,6 +26,7 @@ public class Exam {
 	
 	@ManyToOne   
 	@JoinColumn(name="category_id") 
+	@JsonIgnore
 	private Category category;
 	
 	@ManyToMany(cascade =  {CascadeType.REFRESH,CascadeType.DETACH})  
@@ -41,11 +44,32 @@ public class Exam {
 	}
 
 	public Time getTime() {
-		return time;
+		return this.time;
 	}
 
 	public void setTime(Time time) {
 		this.time = time;
 	}
+
+	
+	//自己创建的方法
+	public void setCategory(Category category) {
+		this.category=category;
+	}
+	
+	public Category getCategory() {
+    	return this.category;
+	}
+
+	public List<Question> getQuestion() {
+		return this.questions;
+	}
+	
+	public void setQuestion(List<Question> questions)
+	{
+		this.questions=questions;
+	}
+
+
 
 }

@@ -18,7 +18,7 @@ import com.petHospital.backend.service.IllnessService;
 
 @RestController
 @RequestMapping(path = "/illness")
-public class IllnessController extends CommonController {
+public class IllnessController {
 
 	@Autowired
 	IllnessService illnessService;
@@ -28,31 +28,31 @@ public class IllnessController extends CommonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<ResponseDTO<IllnessDTO>> addIllness(@RequestBody IllnessDTO IllnessDTO) {
 		ResponseDTO<IllnessDTO> response = illnessService.createIllness(IllnessDTO);	
-		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response, getHttpHeaders(), HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response,  HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<ResponseDTO<IllnessDTO>> deleteIllness(@PathVariable("id") String id) {
 		ResponseDTO<IllnessDTO> response = illnessService.deleteIllness(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response,  HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public ResponseEntity<ResponseDTO<IllnessDTO>> editIllness(@RequestBody IllnessDTO illnessDTO) {
 		ResponseDTO<IllnessDTO> response = illnessService.editIllness(illnessDTO);
-		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response,  HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<IllnessDTO>> getIllness(@PathVariable("id") String id) {
 		ResponseDTO<IllnessDTO> response = illnessService.retreiveIllness(Long.parseLong(id));
-		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response,  HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<IllnessDTO>>> listIllnesss() {
 		ResponseDTO<List<IllnessDTO>> response = illnessService.listAllIllness();
-		return new ResponseEntity<ResponseDTO<List<IllnessDTO>>>(response, getHttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO<List<IllnessDTO>>>(response,  HttpStatus.OK);
 	}
 
 }

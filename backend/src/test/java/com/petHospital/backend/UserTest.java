@@ -48,7 +48,7 @@ public class UserTest
     @Test
     @Transactional  
     @Rollback(true)
-    public void testEditDepartment(){
+    public void testEditUser(){
 	    	UserDTO userDTO = new UserDTO();
 	    	userDTO.setId(Long.parseLong(existId));
 	    	userDTO.setName("liqiqi");

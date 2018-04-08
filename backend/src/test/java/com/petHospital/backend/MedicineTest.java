@@ -25,7 +25,7 @@ import com.petHospital.backend.dto.ResponseDTO;
 @SpringBootTest
 public class MedicineTest 
 {
-	String existId = "1";
+	String existId = "3";
 	String notExistId = "2";
 	
 	@Autowired
