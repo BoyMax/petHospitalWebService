@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		ResponseDTO<UserDTO> responseDTO = new ResponseDTO<UserDTO>();
 		User user = new User();
 		UserDTO userDTO = new UserDTO();
-		try {
+//		try {
 			user = userRepository.getUserByName(userName);
 			if (user == null) {
 				responseDTO.setMessage("User "+userName+" does not exist.");
@@ -49,10 +49,10 @@ public class UserServiceImpl implements UserService {
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(userDTO);
-		} catch (Exception e) {
-			responseDTO.setMessage("failed");
-			responseDTO.setStatus(e.getMessage());
-		}
+//		} catch (Exception e) {
+//			responseDTO.setMessage("failed");
+//			responseDTO.setStatus(e.getMessage());
+//		}
 		return responseDTO;
 	}
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 			department = departmentRepository.findOne(userDTO.getDepartment().getId());
 			user.setDepartment(department);
 		}
-		try {
+//		try {
 			user = userRepository.save(user);
 			userDTO.setId(user.getId());
 			if(department != null) {
@@ -79,10 +79,10 @@ public class UserServiceImpl implements UserService {
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(userDTO);
-		}catch(Exception e){
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-		}
+//		}catch(Exception e){
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//		}
 		return responseDTO;
 	}
 
@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
 			responseDTO.setError_code("404");
 			return responseDTO;
 		}
-		try {
+//		try {
 			// 被维护表删除关联外键
 			for(Department department : user.getDepartments()) {
 				department.getManagers().remove(user);
@@ -132,10 +132,10 @@ public class UserServiceImpl implements UserService {
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(userDTO);
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//		}
 		return responseDTO;
 	}
 
@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
 			}
 			user.setDepartment(department);
 		}
-		try {
+//		try {
 			user = userRepository.save(user);
 			userDTO.setId(user.getId());
 			if(user.getDepartment() != null) {
@@ -170,11 +170,11 @@ public class UserServiceImpl implements UserService {
 			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(userDTO);
-		}catch(Exception e){
-			responseDTO.setMessage(e.getMessage());
-			responseDTO.setStatus("failed");
-			return responseDTO;
-		}
+//		}catch(Exception e){
+//			responseDTO.setMessage(e.getMessage());
+//			responseDTO.setStatus("failed");
+//			return responseDTO;
+//		}
 		return responseDTO;
 	}
 	
@@ -182,13 +182,13 @@ public class UserServiceImpl implements UserService {
 		ResponseDTO<List<UserDTO>> responseDTO = new ResponseDTO<List<UserDTO>>();
 		ArrayList<UserDTO> userDTOs = new ArrayList<UserDTO>();
 		List<User> users = new ArrayList<User>();
-		try {
+//		try {
 			users = (List<User>) userRepository.findAll();
-		} catch (Exception e) {
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-			return responseDTO;
-		}
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
 		for (User user : users) {
 			UserDTO userDTO = new UserDTO();
 			userDTO.setId(user.getId());
