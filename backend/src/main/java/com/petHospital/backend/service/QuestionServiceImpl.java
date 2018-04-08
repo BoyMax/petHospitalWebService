@@ -1,7 +1,6 @@
 package com.petHospital.backend.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.petHospital.backend.dao.CategoryRepository;
 import com.petHospital.backend.dao.QuestionRepository;
-import com.petHospital.backend.dto.DepartmentDTO;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
-import com.petHospital.backend.model.Category;
-import com.petHospital.backend.model.Department;
 import com.petHospital.backend.model.Question;
-import com.petHospital.backend.model.User;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {

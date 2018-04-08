@@ -60,7 +60,7 @@ public class ExamServieceImpl implements ExamService{
 	List<Question> questions=new ArrayList<Question>();
 	List<Question> questions_random=new ArrayList<Question>();
 	
-	questions = (List<Question>) questionRepository.getQuestionsByCatagory(examDTO.getCategory().getId());
+	questions = (List<Question>) questionRepository.listQuestionsByCategory(examDTO.getCategory().getId());
 	questions_random=getRandomList(questions,10);
 	
 	exam.setTime(examDTO.getTime());
