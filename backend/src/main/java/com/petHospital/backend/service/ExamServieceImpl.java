@@ -8,12 +8,12 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
+import com.petHospital.backend.dao.CategoryRepository;
 import com.petHospital.backend.dao.ExamRepository;
 import com.petHospital.backend.dao.QuestionRepository;
 import com.petHospital.backend.dto.ExamDTO;
 import com.petHospital.backend.dto.ResponseDTO;
+import com.petHospital.backend.model.Category;
 import com.petHospital.backend.model.Exam;
 import com.petHospital.backend.model.Question;
 
@@ -27,8 +27,8 @@ public class ExamServieceImpl implements ExamService{
 	 ExamRepository examRepository;
 	 @Autowired
 	 QuestionRepository questionRepository;
-	 
-	 
+	 @Autowired
+	 CategoryRepository categoryRepositery;
 	public ResponseDTO<ExamDTO> retreiveExam(Long id) {	
 	ResponseDTO<ExamDTO> responseDTO = new ResponseDTO<ExamDTO>();
 	Exam exam = new Exam();
@@ -116,8 +116,26 @@ public ResponseDTO<ExamDTO> deleteExam(Long id) {
 public ResponseDTO<ExamDTO> editExam(ExamDTO examDTO) {
 	ResponseDTO<ExamDTO> responseDTO = new ResponseDTO<ExamDTO>();
 	Exam exam = examRepository.findOne(examDTO.getId());//得到要修改的考试ID
+
+	if(exam == null) {
+		responseDTO.setMessage("Exam "+examDTO.getId()+" does not exist");
+		responseDTO.setStatus("failed");
+		return responseDTO;
+	}
+	
 	exam.setTime(examDTO.getTime());
+	
+	
+	Category category=categoryRepositery.findOne(examDTO.getCategory().getId());
+	if(category==null)
+	{
+		responseDTO.setError_code("404");
+		responseDTO.setStatus("failed");
+		responseDTO.setMessage("Category does not exist whoses id =" + exam.getCategory().getId());
+		return responseDTO;
+	}
 	exam.setCategory(examDTO.getCategory());
+
 //	exam.setQuestion(examDTO.getQuestions());
 	
 	if(validatQuestions(examDTO,exam,responseDTO) == false) {

@@ -177,9 +177,9 @@ ResponseEntity<ResponseDTO<ExamDTO>> responseEntity3 = examController.editExam(e
 assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 
     
-/*修改试卷时传入与category不存在的试题*/
-/*修改试卷时传入与category不存在的试题*/
-/*修改试卷时传入与category不存在的试题*/
+/*修改试卷时传入与category不匹配的试题*/
+/*修改试卷时传入与category不匹配的试题*/
+/*修改试卷时传入与category不匹配的试题*/
 	    ExamDTO examDTO4 = new ExamDTO();
 		//设置修改的考试ID
 		examDTO4.setId(Long.parseLong(existId));

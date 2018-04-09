@@ -3,24 +3,29 @@ package com.petHospital.backend;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.petHospital.backend.controller.QuestionController;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
+import com.petHospital.backend.model.User;
  
 
 
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class QuestionTest 
 {
 	//分支覆盖条件
@@ -32,7 +37,7 @@ public class QuestionTest
 	@Autowired
     private QuestionController questionController;
 
- //   @Test
+    @Test
     public void contexLoads() throws Exception {
         assertThat(questionController).isNotNull();
     }
