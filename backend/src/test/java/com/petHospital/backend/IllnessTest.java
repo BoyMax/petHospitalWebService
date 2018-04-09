@@ -19,7 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.petHospital.backend.controller.IllnessController;
 import com.petHospital.backend.dto.IllnessDTO;
 import com.petHospital.backend.dto.ResponseDTO;
+import com.petHospital.backend.model.Category;
 import com.petHospital.backend.model.Medicine;
+import com.petHospital.backend.model.Vaccine;
  
 
 
@@ -30,7 +32,12 @@ public class IllnessTest
 {
 	String existId = "1";
 	String notExistId = "100";
-	Long medicineId = 1L;
+	Long existMedicineId = 1L;
+	Long notExistMedicineId = 100L;
+	Long existCategoryId = 2L;
+	Long notExistCategoryId = 100L;
+	Long existVaccineId = 1L;
+	Long notExistVaccineId = 100L;
 	
 	@Autowired
     private IllnessController illnessController;
@@ -74,7 +81,16 @@ public class IllnessTest
 		illnessDTO.setResult("testResult2");
 		illnessDTO.setTreatment("testTreat2");
     		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity = illnessController.editIllness(illnessDTO);
+    		IllnessDTO illnessDTO2 = new IllnessDTO();
+    		illnessDTO2.setId(Long.parseLong(existId));
+    		List<Vaccine> vaccines = new ArrayList<Vaccine>();
+    		Vaccine vaccine = new Vaccine();
+    		vaccine.setId(notExistVaccineId);
+    	    vaccines.add(vaccine);   		
+    		illnessDTO2.setVaccines(vaccines);
+    		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity2 = illnessController.editIllness(illnessDTO2);
         assertTrue( responseEntity.getBody().getStatus() == "success" );
+        assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
     
     @Test
@@ -87,13 +103,52 @@ public class IllnessTest
     		illnessDTO.setProcess("testProcess");
     		illnessDTO.setResult("testResult");
     		illnessDTO.setTreatment("testTreat");
+    		
     		List<Medicine> medicines = new ArrayList<Medicine>();
     		Medicine medicine = new Medicine();
-    		medicine.setId(medicineId);
-    		medicines.add(medicine);
+    		medicine.setId(existMedicineId);
+    		medicines.add(medicine);   		
+    		Medicine medicine2 = new Medicine();
+    		medicine2.setId(notExistMedicineId);
+    		medicines.add(medicine2);
     		illnessDTO.setMedicines(medicines);
 		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity = illnessController.addIllness(illnessDTO);
-		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+		IllnessDTO illnessDTO3 = new IllnessDTO();
+		Category category = new Category();
+		category.setId(notExistCategoryId);
+		illnessDTO3.setCategory(category);
+		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity3 = illnessController.addIllness(illnessDTO3);
+		
+		IllnessDTO illnessDTO4 = new IllnessDTO();
+		List<Vaccine> vaccines = new ArrayList<Vaccine>();
+		Vaccine vaccine = new Vaccine();
+		vaccine.setId(notExistVaccineId);
+	    vaccines.add(vaccine);   		
+		illnessDTO4.setVaccines(vaccines);
+		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity4 = illnessController.addIllness(illnessDTO4);
+		
+		
+		IllnessDTO illnessDTO2 = new IllnessDTO();
+		List<Medicine> medicines2 = new ArrayList<Medicine>();
+		Medicine medicine3 = new Medicine();
+		medicine3.setId(existMedicineId);
+		medicines2.add(medicine3);
+		illnessDTO2.setMedicines(medicines2);
+		List<Vaccine> vaccines2 = new ArrayList<Vaccine>();
+		Vaccine vaccine3 = new Vaccine();
+		vaccine3.setId(existVaccineId);
+		vaccines2.add(vaccine3);
+		illnessDTO2.setVaccines(vaccines2);
+		Category category2 = new Category();
+		category2.setId(existCategoryId);
+		illnessDTO2.setCategory(category2);
+		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity2 = illnessController.addIllness(illnessDTO2);
+		
+		assertTrue( responseEntity.getBody().getStatus() == "failed" );
+		assertTrue( responseEntity2.getBody().getStatus() == "success" );
+		assertTrue( responseEntity3.getBody().getStatus() == "failed" );
+		assertTrue( responseEntity4.getBody().getStatus() == "failed" );
     }
     
     @Test
@@ -101,6 +156,8 @@ public class IllnessTest
     @Rollback(true)
     public void testDeleteIllness() {
 		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity = illnessController.deleteIllness(existId);
+		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity2 = illnessController.deleteIllness(notExistId);
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
     }
 }
