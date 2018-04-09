@@ -1,4 +1,5 @@
 package com.petHospital.backend.controller;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +32,16 @@ public class MultimediaController{
         String upaloadUrl = "/home/images/";//得到当前工程路径拼接上文件名
         int caseType = Integer.valueOf(request.getParameter("caseType"));
         long caseId = Long.valueOf(request.getParameter("caseId"));
-        /*System.out.println(request.getParameter("caseId"));
-        System.out.println(request.getParameter("caseType"));*/
-        ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 0);
+        System.out.println(request.getParameter("caseId"));
+        System.out.println(request.getParameter("caseType"));
+        ResponseDTO<List<MultimediaDTO>> response = null;
+		try {
+			response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 0);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, HttpStatus.OK);
 	}
 	
@@ -45,9 +53,16 @@ public class MultimediaController{
         String upaloadUrl = "/home/videos/";//得到当前工程路径拼接上文件名
         int caseType = Integer.valueOf(request.getParameter("caseType"));
         long caseId = Long.valueOf(request.getParameter("caseId"));
-        /*System.out.println(request.getParameter("caseId"));
-        System.out.println(request.getParameter("caseType"));*/
-        ResponseDTO<List<MultimediaDTO>> response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 1);
+        System.out.println(request.getParameter("caseId"));
+        System.out.println(request.getParameter("caseType"));
+        ResponseDTO<List<MultimediaDTO>> response = null;
+		try {
+			response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 1);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         return new ResponseEntity<ResponseDTO<List<MultimediaDTO>>>(response, HttpStatus.OK);
 	}
 }
