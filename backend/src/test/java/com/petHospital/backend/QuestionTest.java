@@ -29,9 +29,9 @@ import com.petHospital.backend.model.User;
 public class QuestionTest 
 {
 	//分支覆盖条件
-	String existId = "1";
+	String existId = "5";
 	String notExistId = "100";
-	Long categoryId = (long) 1;
+	Long categoryId = (long) 2;
 	Long categoryNotExistId = (long) 100;
 	
 	@Autowired
@@ -100,14 +100,14 @@ public class QuestionTest
         
         QuestionDTO questionDTO2 = new QuestionDTO();
 		questionDTO2.setId(Long.parseLong(notExistId));
-		questionDTO.setAskDescription("以下哪个选项可能是红眼病的病因？");
-		questionDTO.setAdescription("A宠物用品不卫生");
-		questionDTO.setBdescription("B饲料不卫生");
-		questionDTO.setCdescription("C流感引起");
-		questionDTO.setDdescription("D宠物没吃饱");
-		questionDTO.setAnswer("A");
-		questionDTO.setQuestionType(0);
-		questionDTO.setUserType(1);
+		questionDTO2.setAskDescription("以下哪个选项可能是红眼病的病因？");
+		questionDTO2.setAdescription("A宠物用品不卫生");
+		questionDTO2.setBdescription("B饲料不卫生");
+		questionDTO2.setCdescription("C流感引起");
+		questionDTO2.setDdescription("D宠物没吃饱");
+		questionDTO2.setAnswer("A");
+		questionDTO2.setQuestionType(0);
+		questionDTO2.setUserType(1);
 		
 		ResponseEntity<ResponseDTO<QuestionDTO>> responseEntity2 = questionController.editQuestion(questionDTO2);
     assertTrue( responseEntity2.getBody().getStatus() == "failed" );

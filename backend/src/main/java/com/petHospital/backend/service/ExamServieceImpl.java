@@ -33,17 +33,17 @@ public class ExamServieceImpl implements ExamService{
 	ResponseDTO<ExamDTO> responseDTO = new ResponseDTO<ExamDTO>();
 	Exam exam = new Exam();
 	ExamDTO examDTO = new ExamDTO();
-	try {
+//	try {
 		exam = examRepository.findOne(id);
 		if (exam == null) {
 			responseDTO.setMessage("Exam"+id+"does not exist.");
 			responseDTO.setStatus("failed");
 			return responseDTO;
 		}
-	}catch(Exception e) {
-		responseDTO.setMessage(e.getMessage());
-		responseDTO.setStatus("failed");
-	}
+//	}catch(Exception e) {
+//		responseDTO.setMessage(e.getMessage());
+//		responseDTO.setStatus("failed");
+//	}
 	examDTO.setId(exam.getId());
 	examDTO.setTime(exam.getTime());
 	examDTO.setCategory(exam.getCategory());
@@ -67,7 +67,7 @@ public class ExamServieceImpl implements ExamService{
 	exam.setCategory(examDTO.getCategory());
     exam.setQuestion(questions_random);
 
-	try {
+//	try {
 		exam = examRepository.save(exam);
 		examDTO.setId(exam.getId());
 		examDTO.setTime(exam.getTime());
@@ -76,10 +76,10 @@ public class ExamServieceImpl implements ExamService{
 		responseDTO.setStatus("success");
 		responseDTO.setMessage("success");
 		responseDTO.setData(examDTO);
-	}catch(Exception e){
-		responseDTO.setStatus("failed");
-		responseDTO.setMessage(e.getMessage());
-	}
+//	}catch(Exception e){
+//		responseDTO.setStatus("failed");
+//		responseDTO.setMessage(e.getMessage());
+//	}
 	return responseDTO;
 }
 
@@ -101,15 +101,15 @@ public ResponseDTO<ExamDTO> deleteExam(Long id) {
 		responseDTO.setStatus("failed");
 		return responseDTO;
 	}
-	try {
+//	try {
 		examRepository.delete(id);
 		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(examDTO);
-	}catch(Exception e){
-		responseDTO.setMessage(e.getMessage());
-		responseDTO.setStatus("failed");
-	}
+//	}catch(Exception e){
+//		responseDTO.setMessage(e.getMessage());
+//		responseDTO.setStatus("failed");
+//	}
 	return responseDTO;
 }
 
@@ -141,7 +141,7 @@ public ResponseDTO<ExamDTO> editExam(ExamDTO examDTO) {
 	if(validatQuestions(examDTO,exam,responseDTO) == false) {
 		return responseDTO;
 	}
-	try {
+//	try {
 		examRepository.save(exam);
 		examDTO.setId(exam.getId());
 		examDTO.setTime(exam.getTime());
@@ -150,10 +150,10 @@ public ResponseDTO<ExamDTO> editExam(ExamDTO examDTO) {
 		responseDTO.setMessage("success");
 		responseDTO.setData(examDTO);
 		responseDTO.setStatus("success");
-	}catch(Exception e){
-		responseDTO.setMessage(e.getMessage());
-		responseDTO.setStatus("failed");
-	}
+//	}catch(Exception e){
+//		responseDTO.setMessage(e.getMessage());
+//		responseDTO.setStatus("failed");
+//	}
 	return responseDTO;
 }
 
@@ -246,13 +246,13 @@ public ResponseDTO<List<ExamDTO>> listAllExam() {
 	ResponseDTO<List<ExamDTO>> responseDTO = new ResponseDTO<List<ExamDTO>>();
 	ArrayList<ExamDTO> examDTOs = new ArrayList<ExamDTO>();
 	List<Exam> exam= new ArrayList<Exam>();
-	try {
+//	try {
 		exam = (List<Exam>) examRepository.findAll();
-	} catch (Exception e) {
-		responseDTO.setStatus("failed");
-		responseDTO.setMessage(e.getMessage());
-		return responseDTO;
-	}
+//	} catch (Exception e) {
+//		responseDTO.setStatus("failed");
+//		responseDTO.setMessage(e.getMessage());
+//		return responseDTO;
+//	}
 	for (Exam exam1 : exam) {
 		ExamDTO examDTO = new ExamDTO();
 		examDTO.setId(exam1.getId());

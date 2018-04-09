@@ -45,8 +45,8 @@ public class ExamTest
 	//分支覆盖条件
 	String existId = "2";
 	String notExistId = "200";
-	Long categoryId = (long) 1;
-	Long categoryNotMatchId =(long)2;
+	Long categoryId = (long) 2;
+	Long categoryNotMatchId =(long)3;
 	Long categoryNotExistId = (long) 100;
 	
 	@Autowired
@@ -105,7 +105,7 @@ public class ExamTest
     			category.setId(categoryId);
     			examDTO.setCategory(category);
     		//修改Questions
-				String questionArray ="[{\"id\":11},{\"id\":2},{\"id\":3},{\"id\":4},{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},]";
+				String questionArray ="[{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},{\"id\":11},{\"id\":12},{\"id\":13},{\"id\":14}]";
                 List<Question> questionList =getListByArray(Question.class,questionArray );
 				examDTO.setQuestions((List<Question>) questionList );
     			
@@ -136,7 +136,7 @@ public class ExamTest
 			category2.setId(categoryId);
 			examDTO2.setCategory(category2);
 		//修改Questions
-			String questionArray2 ="[{\"id\":11},{\"id\":2},{\"id\":3},{\"id\":4},{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},]";
+			String questionArray2 ="[{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},{\"id\":11},{\"id\":12},{\"id\":13},{\"id\":14}]";
             List<Question> questionList2 =getListByArray(Question.class,questionArray2 );
 			examDTO2.setQuestions((List<Question>) questionList2 );
 			
@@ -199,7 +199,7 @@ assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 			category4.setId(categoryNotMatchId);
 			examDTO4.setCategory(category4);
 		//设置Questions
-			String questionArray4 ="[{\"id\":11},{\"id\":2},{\"id\":3},{\"id\":4},{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},]";
+			String questionArray4 ="[{\"id\":11},{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},{\"id\":16},{\"id\":13},{\"id\":12}]";
 	        List<Question> questionList4 =getListByArray(Question.class,questionArray4 );
 			examDTO4.setQuestions((List<Question>) questionList4 );
 			
@@ -260,7 +260,7 @@ assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 				category6.setId(categoryId);
 				examDTO6.setCategory(category6);
 			//设置Questions
-				String questionArray6="[{\"id\":100},{\"id\":200},{\"id\":3},{\"id\":4},{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":10},]";
+				String questionArray6="[{\"id\":100},{\"id\":200},{\"id\":11},{\"id\":10},{\"id\":5},{\"id\":6},{\"id\":7},{\"id\":8},{\"id\":9},{\"id\":12},]";
                 List<Question> questionList6 =getListByArray(Question.class,questionArray6);
 				examDTO6.setQuestions((List<Question>) questionList6);
 				
