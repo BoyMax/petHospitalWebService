@@ -28,8 +28,8 @@ import com.petHospital.backend.model.Illness;
 public class MedicineTest 
 {
 	String existId = "1";
-	String notExistId = "2";
-	Long illnessId = 1L;
+	String notExistId = "100";
+	Long illnessId = 3L;
 	Long notExistedIllnessId = 100L;
 	
 	@Autowired
@@ -87,7 +87,7 @@ public class MedicineTest
 		illnesses.add(illness);
 		medicineDTO.setIllnesses(illnesses);
 		ResponseEntity<ResponseDTO<MedicineDTO>> responseEntity2 = medicineController.editMedicine(medicineDTO);
-		assertTrue( responseEntity2.getBody().getStatus() == "success" );
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
     
     @Test
@@ -107,6 +107,14 @@ public class MedicineTest
 		medicineDTO.setIllnesses(illnesses);
 		ResponseEntity<ResponseDTO<MedicineDTO>> responseEntity = medicineController.addMedicine(medicineDTO);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+		  //notExistedIllnessId
+		illness.setId(notExistedIllnessId);
+		illnesses.clear();
+		illnesses.add(illness);
+		medicineDTO.setIllnesses(illnesses);
+		ResponseEntity<ResponseDTO<MedicineDTO>> responseEntity2 = medicineController.addMedicine(medicineDTO);
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
     
     @Test

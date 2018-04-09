@@ -30,9 +30,9 @@ public class DepartmentTest
 {
 	//分支覆盖条件
 	String existId = "2";
-	String notExistId = "1";
+	String notExistId = "100";
 	Long managerId = 1L;
-	Long managerNotExistId = 2L;
+	Long managerNotExistId = 100L;
 	
 	@Autowired
     private DepartmentController departmentController;
@@ -104,6 +104,18 @@ public class DepartmentTest
 		departmentDTO.setDescription("档案馆描述");
 		ResponseEntity<ResponseDTO<DepartmentDTO>> responseEntity = departmentController.addDepartment(departmentDTO);
 		assertTrue(responseEntity.getBody().getStatus() == "success" );
+		
+		DepartmentDTO departmentDTO2 = new DepartmentDTO();
+		departmentDTO2.setId(Long.parseLong(existId));
+		departmentDTO2.setName("档案馆3");
+		departmentDTO2.setDescription("档案馆描述3");
+		List<User> managers2 = new ArrayList<User>();
+		User user2 = new User();
+		user2.setId(managerNotExistId);
+		managers2.add(user2);
+		departmentDTO2.setManagers(managers2);
+		ResponseEntity<ResponseDTO<DepartmentDTO>> responseEntity2 = departmentController.addDepartment(departmentDTO2);
+		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
     
     @Test

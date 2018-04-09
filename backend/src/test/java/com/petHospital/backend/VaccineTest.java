@@ -26,9 +26,10 @@ import com.petHospital.backend.model.Illness;
 @SpringBootTest
 public class VaccineTest 
 {
-	String existId = "2";
-	String notExistId = "1";
-	Long illnessId = 1L;
+	String existId = "6";
+	String notExistId = "100";
+	Long illnessId = 3L;
+	Long notExistIllnessId = 100L;
 	
 	@Autowired
     private VaccineController vaccineController;
@@ -73,6 +74,12 @@ public class VaccineTest
     		VaccineDTO.setExpirationDate(Date.valueOf("2018-12-31"));
     		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity = vaccineController.editVaccine(VaccineDTO);
         assertTrue( responseEntity.getBody().getStatus() == "success" );
+        
+        Illness illness = new Illness();
+        illness.setId(notExistIllnessId);
+        VaccineDTO.setIllness(illness);       
+        ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity2 = vaccineController.editVaccine(VaccineDTO);
+        assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     }
     
     @Test
@@ -90,6 +97,20 @@ public class VaccineTest
 		VaccineDTO.setIllness(illness);
 		ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity = vaccineController.addVaccine(VaccineDTO);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+        illness.setId(notExistIllnessId);
+        VaccineDTO.setIllness(illness);       
+        ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity2 = vaccineController.addVaccine(VaccineDTO);
+        assertTrue( responseEntity2.getBody().getStatus() == "failed" );
+        
+        VaccineDTO.setIllness(null);       
+        ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity3 = vaccineController.addVaccine(VaccineDTO);
+        assertTrue( responseEntity3.getBody().getStatus() == "success" );
+        
+        illness.setId(null);
+        VaccineDTO.setIllness(illness);       
+        ResponseEntity<ResponseDTO<VaccineDTO>> responseEntity4 = vaccineController.addVaccine(VaccineDTO);
+        assertTrue( responseEntity4.getBody().getStatus() == "success" );
     }
     
     @Test

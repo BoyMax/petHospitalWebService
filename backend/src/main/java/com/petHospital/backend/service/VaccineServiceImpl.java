@@ -152,43 +152,48 @@ public class VaccineServiceImpl implements VaccineService{
 		ResponseDTO<List<VaccineDTO>> responseDTO = new ResponseDTO<List<VaccineDTO>>();
 		ArrayList<VaccineDTO> vaccineDTOs = new ArrayList<VaccineDTO>();
 		List<Vaccine> vaccines = new ArrayList<Vaccine>();
-//		try {
-			vaccines = (List<Vaccine>) vaccineRepository.findAll();
-//		} catch (Exception e) {
-//			responseDTO.setStatus("failed");
-//			responseDTO.setMessage(e.getMessage());
-//			return responseDTO;
-//		}
-		if (!vaccines.isEmpty()) {
-			for (Vaccine vaccine : vaccines) {
-				VaccineDTO vaccineDTO = new VaccineDTO();
-				vaccineDTO.setId(vaccine.getId());
-				vaccineDTO.setDescription(vaccine.getDescription());
-				vaccineDTO.setName(vaccine.getName());
-				vaccineDTO.setPrice(vaccine.getPrice());
-				vaccineDTO.setProductionDate(vaccine.getProductionDate());
-				vaccineDTO.setExpirationDate(vaccine.getExpirationDate());
-				vaccineDTO.setIllness(vaccine.getIllness());
-				vaccineDTOs.add(vaccineDTO);
-			}
+		// try {
+		vaccines = (List<Vaccine>) vaccineRepository.findAll();
+		// } catch (Exception e) {
+		// responseDTO.setStatus("failed");
+		// responseDTO.setMessage(e.getMessage());
+		// return responseDTO;
+		// }
+		for (Vaccine vaccine : vaccines) {
+			VaccineDTO vaccineDTO = new VaccineDTO();
+			vaccineDTO.setId(vaccine.getId());
+			vaccineDTO.setDescription(vaccine.getDescription());
+			vaccineDTO.setName(vaccine.getName());
+			vaccineDTO.setPrice(vaccine.getPrice());
+			vaccineDTO.setProductionDate(vaccine.getProductionDate());
+			vaccineDTO.setExpirationDate(vaccine.getExpirationDate());
+			vaccineDTO.setIllness(vaccine.getIllness());
+			vaccineDTOs.add(vaccineDTO);
 		}
 		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(vaccineDTOs);
-		
+
 		return responseDTO;
 	}
 	
 	
 	private boolean validateIllness(VaccineDTO vaccineDTO, Vaccine vaccine, ResponseDTO<VaccineDTO> responseDTO) {
 		Illness illness = vaccineDTO.getIllness();
+		
 		if(illness != null && illness.getId() != null) {
+			Long illnessId = illness.getId();
 //			try {
 				illness = illnessRepository.findOne(illness.getId());
 //			}catch (Exception e) {
 //				responseDTO.setStatus("failed");
 //				responseDTO.setMessage(e.getMessage());
 //			}
+			if(illness==null) {
+				responseDTO.setStatus("failed");
+				responseDTO.setMessage("Illness ID "+ illnessId +"does not exist! ");
+				return false;
+			}
 			vaccine.setIllness(illness);		
 		}
 		return true;

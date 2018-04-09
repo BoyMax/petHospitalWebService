@@ -25,18 +25,19 @@ import com.petHospital.backend.dto.UserDTO;
 @SpringBootTest
 public class UserTest 
 {
-	String existId = "5";
+	String existId = "1";
 	String existUserName = "ken";
 	String existPassword = "123456";	
 	
-	Long existDepartmentId = 5L;
+	Long existDepartmentId = 2L;
 	
 	String notExistId = "100";
 	String notExistUserName = "pappa";
 	String notExistPassword = "000000";
 	 Long notExistDepartmentId=100L;
 	
-	
+	String userNameWithoutDepartment = "minna";
+	 
 	@Autowired
     private UserController userController;
 
@@ -87,9 +88,15 @@ public class UserTest
     	    //id in db
     		ResponseEntity<ResponseDTO<UserDTO>> responseEntity1 = userController.getUser(existUserName);
         assertTrue( responseEntity1.getBody().getStatus() == "success" );
+        
     	    //id not in db
     		ResponseEntity<ResponseDTO<UserDTO>> responseEntity2 = userController.getUser(notExistUserName);
         assertTrue( responseEntity2.getBody().getStatus() == "failed" );
+       
+        //userNameWithoutDepartment
+        ResponseEntity<ResponseDTO<UserDTO>> responseEntity3 = userController.getUser(userNameWithoutDepartment);
+        assertTrue( responseEntity3.getBody().getStatus() == "success" );
+        
     }
     
     @Test
@@ -111,6 +118,17 @@ public class UserTest
 		userDTO.setDepartment(departmentDTO);
 		ResponseEntity<ResponseDTO<UserDTO>> responseEntity2 = userController.editUser(userDTO);
 		assertTrue( responseEntity2.getBody().getStatus() == "failed" );
+		
+		
+		userDTO.setDepartment(null);
+		ResponseEntity<ResponseDTO<UserDTO>> responseEntity3 = userController.editUser(userDTO);
+		assertTrue( responseEntity3.getBody().getStatus() == "success" );
+		
+		//userNameWithoutDepartment withoutid	
+		DepartmentDTO departmentDTO3 = new DepartmentDTO();
+		userDTO.setDepartment(departmentDTO3);
+		ResponseEntity<ResponseDTO<UserDTO>> responseEntity4 = userController.editUser(userDTO);
+		assertTrue( responseEntity4.getBody().getStatus() == "success" );
     }
     
     @Test
@@ -118,13 +136,29 @@ public class UserTest
     @Rollback(true)
     public void testAddUser() {
     		UserDTO userDTO = new UserDTO();
-    		userDTO.setName("Bob");
+    		userDTO.setName("Bob111");
 	    	userDTO.setPassword("123456");
 	    DepartmentDTO departmentDTO = new DepartmentDTO();
 	    	departmentDTO.setId(existDepartmentId);
 	    	userDTO.setDepartment(departmentDTO);
 		ResponseEntity<ResponseDTO<UserDTO>> responseEntity = userController.addUser(userDTO);
 		assertTrue( responseEntity.getBody().getStatus() == "success" );
+		
+		//userNameWithoutDepartment
+		UserDTO userDTO2 = new UserDTO();
+		userDTO2.setName("Ben111");
+		userDTO2.setPassword("123456");
+		ResponseEntity<ResponseDTO<UserDTO>> responseEntity2 = userController.addUser(userDTO2);
+		assertTrue( responseEntity2.getBody().getStatus() == "success" );
+		
+		//userNameWithoutDepartment withoutid
+		UserDTO userDTO3 = new UserDTO();
+		userDTO3.setName("Ben333");
+		userDTO3.setPassword("123456");
+		DepartmentDTO departmentDTO3 = new DepartmentDTO();
+		userDTO3.setDepartment(departmentDTO3);
+		ResponseEntity<ResponseDTO<UserDTO>> responseEntity3 = userController.addUser(userDTO3);
+		assertTrue( responseEntity3.getBody().getStatus() == "success" );
     }
     
     @Test

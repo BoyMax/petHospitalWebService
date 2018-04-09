@@ -45,21 +45,21 @@ public class MultimediaTest {
 	public void testPicUpload() throws IOException {;
 		Map<String, MultipartFile> files = new HashMap<String, MultipartFile>();
 		// 读入 文件   
-        File file = new File("D:/test.jpg");  
+        File file = new File("/Users/Vivien/Desktop/test.jpg");  
         FileInputStream in_file = new FileInputStream(file);  
           
         // 转 MultipartFile  
         MultipartFile multi = new MockMultipartFile("test.jpg", in_file);  
   
         // 创建文件夹  
-        String dire = "D:/test.jpg";  
+        String dire = "/Users/Vivien/Desktop/test.jpg";  
         File file_dire = new File(dire);   
           
         //写入文件   
         multi.transferTo(file_dire);  
         files.put("test", multi);
 		
-		ResponseDTO<List<MultimediaDTO>> responseEntity = multimediaService.uploadPic(files, "/home/images/", 1, 0, 0); 
+		ResponseDTO<List<MultimediaDTO>> responseEntity = multimediaService.uploadPic(files, "/Users/Vivien/Documents/PetHospital/home/images/", 1, 0, 0); 
 		assertTrue(responseEntity.getStatus() == "success");
 		//upload failed assertTrue( responseEntity.getBody().getStatus() == "failed");
 		 

@@ -157,6 +157,9 @@ public class UserServiceImpl implements UserService {
 			}
 			user.setDepartment(department);
 		}
+		else {
+			user.setDepartment(null);
+		}
 //		try {
 			user = userRepository.save(user);
 			userDTO.setId(user.getId());
