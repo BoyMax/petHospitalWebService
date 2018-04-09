@@ -29,7 +29,7 @@ public class CategoryServicelmpl implements CategoryService {
 		 if(validateIllnesses(categoryDTO,category,responseDTO) == false) {
 				return responseDTO;
 			}
-		try {
+//		try {
 			category = categoryRepository.save(category);
 			categoryDTO.setId(category.getId());
 			categoryDTO.setName(category.getName());
@@ -37,10 +37,10 @@ public class CategoryServicelmpl implements CategoryService {
 			responseDTO.setStatus("success");
 			responseDTO.setMessage("success");
 			responseDTO.setData(categoryDTO);
-		}catch(Exception e){
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-		}
+//		}catch(Exception e){
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//		}
 		return responseDTO;
 	}
 	 
@@ -48,17 +48,17 @@ public class CategoryServicelmpl implements CategoryService {
 			ResponseDTO<CategoryDTO> responseDTO = new ResponseDTO<CategoryDTO>();
 			Category category = new Category();
 			CategoryDTO categoryDTO = new CategoryDTO();
-			try {
+//			try {
 				category = categoryRepository.findOne(id);
 				if (category == null) {
 					responseDTO.setMessage("Category"+id+"does not exist.");
 					responseDTO.setStatus("failed");
 					return responseDTO;
 				}
-			}catch(Exception e) {
-				responseDTO.setMessage(e.getMessage());
-				responseDTO.setStatus("failed");
-			}
+//			}catch(Exception e) {
+//				responseDTO.setMessage(e.getMessage());
+//				responseDTO.setStatus("failed");
+//			}
 			categoryDTO.setId(category.getId());
 			categoryDTO.setName(category.getName());
 			categoryDTO.setIllnesses(category.getIllnesses());
@@ -77,15 +77,15 @@ public class CategoryServicelmpl implements CategoryService {
 				responseDTO.setStatus("failed");
 				return responseDTO;
 			}
-			try {
+//			try {
 				categoryRepository.delete(id);
 				responseDTO.setMessage("success");
 				responseDTO.setStatus("success");
 				responseDTO.setData(categoryDTO);
-			}catch(Exception e){
-				responseDTO.setMessage(e.getMessage());
-				responseDTO.setStatus("failed");
-			}
+//			}catch(Exception e){
+//				responseDTO.setMessage(e.getMessage());
+//				responseDTO.setStatus("failed");
+//			}
 			return responseDTO;
 		}
 
@@ -96,7 +96,7 @@ public class CategoryServicelmpl implements CategoryService {
 			if(validateIllnesses(categoryDTO,category,responseDTO) == false) {
 				return responseDTO;
 			}
-			try {
+//			try {
 				categoryRepository.save(category);
 				categoryDTO.setId(category.getId());
 				categoryDTO.setName(category.getName());
@@ -104,10 +104,10 @@ public class CategoryServicelmpl implements CategoryService {
 				responseDTO.setMessage("success");
 				responseDTO.setData(categoryDTO);
 				responseDTO.setStatus("success");
-			}catch(Exception e){
-				responseDTO.setMessage(e.getMessage());
-				responseDTO.setStatus("failed");
-			}
+//			}catch(Exception e){
+//				responseDTO.setMessage(e.getMessage());
+//				responseDTO.setStatus("failed");
+//			}
 			return responseDTO;
 		}
 
@@ -116,13 +116,13 @@ public class CategoryServicelmpl implements CategoryService {
 			ResponseDTO<List<CategoryDTO>> responseDTO = new ResponseDTO<List<CategoryDTO>>();
 			ArrayList<CategoryDTO> categoryDTOs = new ArrayList<CategoryDTO>();
 			List<Category> categorys = new ArrayList<Category>();
-			try {
+//			try {
 				categorys = (List<Category>) categoryRepository.findAll();
-			} catch (Exception e) {
-				responseDTO.setStatus("failed");
-				responseDTO.setMessage(e.getMessage());
-				return responseDTO;
-			}
+//			} catch (Exception e) {
+//				responseDTO.setStatus("failed");
+//				responseDTO.setMessage(e.getMessage());
+//				return responseDTO;
+//			}
 			for (Category category : categorys) {
 				CategoryDTO categoryDTO = new CategoryDTO();
 				categoryDTO.setId(category.getId());
