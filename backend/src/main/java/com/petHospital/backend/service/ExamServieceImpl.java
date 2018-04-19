@@ -61,6 +61,11 @@ public class ExamServieceImpl implements ExamService{
 	List<Question> questions_random=new ArrayList<Question>();
 	
 	questions = (List<Question>) questionRepository.listQuestionsByCategory(examDTO.getCategory().getId());
+	if(questions == null) {
+		responseDTO.setStatus("failed");
+		responseDTO.setMessage("无法创建该类别考试--不存在该类别试题。");
+		return responseDTO;
+	}
 	questions_random=getRandomList(questions,10);
 	
 	exam.setTime(examDTO.getTime());
