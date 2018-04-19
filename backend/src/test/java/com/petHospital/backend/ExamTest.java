@@ -1,4 +1,4 @@
-package com.petHospital.backend;
+/*package com.petHospital.backend;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -144,9 +144,9 @@ public class ExamTest
 	ResponseEntity<ResponseDTO<ExamDTO>> responseEntity2 = examController.editExam(examDTO2);
     assertTrue( responseEntity2.getBody().getStatus() == "failed" );
     
-/*修改试卷时传入与category不存在的试题*/
-/*修改试卷时传入与category不存在的试题*/
-/*修改试卷时传入与category不存在的试题*/
+修改试卷时传入与category不存在的试题
+修改试卷时传入与category不存在的试题
+修改试卷时传入与category不存在的试题
 	ExamDTO examDTO3 = new ExamDTO();
 	//修改考试ID
 	examDTO3.setId(Long.parseLong(existId));
@@ -177,9 +177,9 @@ ResponseEntity<ResponseDTO<ExamDTO>> responseEntity3 = examController.editExam(e
 assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 
     
-/*修改试卷时传入与category不匹配的试题*/
-/*修改试卷时传入与category不匹配的试题*/
-/*修改试卷时传入与category不匹配的试题*/
+修改试卷时传入与category不匹配的试题
+修改试卷时传入与category不匹配的试题
+修改试卷时传入与category不匹配的试题
 	    ExamDTO examDTO4 = new ExamDTO();
 		//设置修改的考试ID
 		examDTO4.setId(Long.parseLong(existId));
@@ -208,9 +208,9 @@ assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 //	    
 	    
 	    
-        /*修改试卷输入试题数目不等于10*/    
-	    /*修改试卷输入试题数目不等于10*/
-	    /*修改试卷输入试题数目不等于10*/
+        修改试卷输入试题数目不等于10    
+	    修改试卷输入试题数目不等于10
+	    修改试卷输入试题数目不等于10
 	    ExamDTO examDTO5 = new ExamDTO();
 		//设置修改的考试ID
 		examDTO5.setId(Long.parseLong(existId));
@@ -238,9 +238,9 @@ assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 		    assertTrue( responseEntity5.getBody().getStatus() == "failed" );
 	        
 		    
-		    /*修改试卷添加不存在的试题*/   
-		    /*修改试卷添加不存在的试题*/  
-		    /*修改试卷添加不存在的试题*/   
+		    修改试卷添加不存在的试题   
+		    修改试卷添加不存在的试题  
+		    修改试卷添加不存在的试题   
 		    ExamDTO examDTO6 = new ExamDTO();
 			//设置修改的考试ID
 			examDTO6.setId(Long.parseLong(existId));
@@ -313,13 +313,13 @@ assertTrue( responseEntity3.getBody().getStatus() == "failed" );
     }
     
     
-    /**
+    *//**
      * 根据JSONArray String获取到List
      * @param <T>
      * @param <T>
      * @param jArrayStr
      * @return
-     */
+     *//*
     public static <T> List<Question> getListByArray(Class<T> Question,String jArrayStr) {
         List<Question> question = new ArrayList();
         JSONArray jsonArray = JSONArray.parseArray(jArrayStr);
@@ -336,3 +336,4 @@ assertTrue( responseEntity3.getBody().getStatus() == "failed" );
 
     
 }
+*/
