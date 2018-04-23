@@ -35,10 +35,11 @@ public class IllnessServiceImpl implements IllnessService {
 	 VaccineRepository vaccineRepository;
 	 
 
-	public ResponseDTO<IllnessDTO> retreiveIllness(Long id) {
+	public ResponseDTO<IllnessDTO> retreiveIllnessById(Long id) {
 		ResponseDTO<IllnessDTO> responseDTO = new ResponseDTO<IllnessDTO>();
 		Illness illness = new Illness();
 		IllnessDTO illnessDTO = new IllnessDTO();
+		if (id != null) {
 //		try {
 			illness = illnessRepository.findOne(id);
 			if (illness == null) {
@@ -51,6 +52,16 @@ public class IllnessServiceImpl implements IllnessService {
 //			responseDTO.setMessage(e.getMessage());
 //			responseDTO.setStatus("failed");
 //		}
+		}
+//		if(illnessName != null) {
+//			illness = illnessRepository.getIllnessByName(illnessName);
+//			if (illness == null) {
+//			responseDTO.setMessage("Illness "+illnessName+" does not exist.");
+//			responseDTO.setStatus("failed");
+//			responseDTO.setError_code("404");
+//			return responseDTO;
+//			}
+//		}
 		illnessDTO.setId(illness.getId());
 		illnessDTO.setName(illness.getName());
 		illnessDTO.setDiseaseDescription(illness.getDiseaseDescription());
@@ -59,11 +70,62 @@ public class IllnessServiceImpl implements IllnessService {
 		illnessDTO.setResult(illness.getResult());
 		illnessDTO.setCategory(illness.getCategory());
 		illnessDTO.setMedicines(illness.getMedicines());
-//		illnessDTO.setMultimedias(illness.getMultimedias());
+		illnessDTO.setMultimedias(illness.getMultimedias());
 	    illnessDTO.setVaccines(illness.getVaccines());
 		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
 		responseDTO.setData(illnessDTO);
+		return responseDTO;
+	}
+	
+	public ResponseDTO<List<IllnessDTO>> retreiveIllnessByName(String illnessName) {
+		ResponseDTO<List<IllnessDTO>> responseDTO = new ResponseDTO<List<IllnessDTO>>();
+		List<Illness> illnesses = new ArrayList<Illness>();
+//		if (id != null) {
+////		try {
+//			illness = illnessRepository.findOne(id);
+//			if (illness == null) {
+//				responseDTO.setMessage("Illness"+id.toString()+"does not exist.");
+//				responseDTO.setStatus("failed");
+//				return responseDTO;
+//			}
+////		}
+////		catch(Exception e) {
+////			responseDTO.setMessage(e.getMessage());
+////			responseDTO.setStatus("failed");
+////		}
+//		}
+		if(illnessName == null) {
+			responseDTO.setMessage("input name is not exist");
+			responseDTO.setStatus("failed");
+		}
+		else{
+			illnesses = illnessRepository.searchIllness(illnessName);
+			if (illnesses == null || illnesses.isEmpty()) {
+			responseDTO.setMessage("Illness "+illnessName+" does not exist.");
+			responseDTO.setStatus("success");
+			return responseDTO;
+			}
+		}
+		
+		List<IllnessDTO> illnessDTOs = new ArrayList<IllnessDTO>();
+		for(	Illness illness:illnesses) {
+			IllnessDTO illnessDTO = new IllnessDTO();
+			illnessDTO.setId(illness.getId());
+			illnessDTO.setName(illness.getName());
+			illnessDTO.setDiseaseDescription(illness.getDiseaseDescription());
+			illnessDTO.setProcess(illness.getProcess());
+			illnessDTO.setTreatment(illness.getTreatment());
+			illnessDTO.setResult(illness.getResult());
+			illnessDTO.setCategory(illness.getCategory());
+			illnessDTO.setMedicines(illness.getMedicines());
+			illnessDTO.setMultimedias(illness.getMultimedias());
+		    illnessDTO.setVaccines(illness.getVaccines());
+		    illnessDTOs.add(illnessDTO);
+		}
+		responseDTO.setMessage("success");
+		responseDTO.setStatus("success");
+		responseDTO.setData(illnessDTOs);
 		return responseDTO;
 	}
 	
@@ -174,7 +236,7 @@ public class IllnessServiceImpl implements IllnessService {
 			illnessDTO.setProcess(illness.getProcess());
 			illnessDTO.setCategory(illness.getCategory());
 			illnessDTO.setMedicines(illness.getMedicines());
-//			illnessDTO.setMultimedias(illness.getMultimedias());
+			illnessDTO.setMultimedias(illness.getMultimedias());
 			illnessDTO.setResult(illness.getResult());
 			illnessDTO.setTreatment(illness.getTreatment());
 			illnessDTO.setVaccines(illness.getVaccines());
