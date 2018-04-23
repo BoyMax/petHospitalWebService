@@ -55,5 +55,11 @@ public class MedicineController {
 		ResponseDTO<List<MedicineDTO>> response = medicineService.listMedicines();
 		return new ResponseEntity<ResponseDTO<List<MedicineDTO>>>(response,  HttpStatus.OK);
 	}
+    
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+   	public ResponseEntity<ResponseDTO<List<MedicineDTO>>> searchMedicines(@RequestBody MedicineDTO medicine) {
+   		ResponseDTO<List<MedicineDTO>> response = medicineService.searchMedicines(medicine.getName());
+   		return new ResponseEntity<ResponseDTO<List<MedicineDTO>>>(response,  HttpStatus.OK);
+   	}
 }
 

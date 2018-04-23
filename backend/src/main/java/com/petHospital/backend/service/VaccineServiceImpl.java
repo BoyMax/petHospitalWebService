@@ -198,4 +198,33 @@ public class VaccineServiceImpl implements VaccineService{
 		}
 		return true;
 	}
+
+	public ResponseDTO<List<VaccineDTO>> searchVaccines(String name) {
+		ResponseDTO<List<VaccineDTO>> responseDTO = new ResponseDTO<List<VaccineDTO>>();
+		ArrayList<VaccineDTO> vaccineDTOs = new ArrayList<VaccineDTO>();
+		List<Vaccine> vaccines = new ArrayList<Vaccine>();
+		// try {
+		vaccines = (List<Vaccine>) vaccineRepository.search(name);
+		// } catch (Exception e) {
+		// responseDTO.setStatus("failed");
+		// responseDTO.setMessage(e.getMessage());
+		// return responseDTO;
+		// }
+		for (Vaccine vaccine : vaccines) {
+			VaccineDTO vaccineDTO = new VaccineDTO();
+			vaccineDTO.setId(vaccine.getId());
+			vaccineDTO.setDescription(vaccine.getDescription());
+			vaccineDTO.setName(vaccine.getName());
+			vaccineDTO.setPrice(vaccine.getPrice());
+			vaccineDTO.setProductionDate(vaccine.getProductionDate());
+			vaccineDTO.setExpirationDate(vaccine.getExpirationDate());
+			vaccineDTO.setIllness(vaccine.getIllness());
+			vaccineDTOs.add(vaccineDTO);
+		}
+		responseDTO.setMessage("success");
+		responseDTO.setStatus("success");
+		responseDTO.setData(vaccineDTOs);
+
+		return responseDTO;
+	}
 }

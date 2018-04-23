@@ -62,10 +62,10 @@ public class IllnessTest
     public void testGetIllness()
     {
     	    //id not in db
-    		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity1 = illnessController.getIllness(notExistId);
+    		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity1 = illnessController.getIllnessById(notExistId);
         assertTrue( responseEntity1.getBody().getStatus() == "failed" );
     	    //id is in db
-    		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity2 = illnessController.getIllness(existId);
+    		ResponseEntity<ResponseDTO<IllnessDTO>> responseEntity2 = illnessController.getIllnessById(existId);
         assertTrue( responseEntity2.getBody().getStatus() == "success" );
     }
     

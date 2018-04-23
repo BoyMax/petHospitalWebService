@@ -189,4 +189,33 @@ public class MedicineServiceImpl implements MedicineService{
 			return true;
 		}
 
+		public ResponseDTO<List<MedicineDTO>> searchMedicines(String name) {
+			ResponseDTO<List<MedicineDTO>> responseDTO = new ResponseDTO<List<MedicineDTO>>();
+			ArrayList<MedicineDTO> medicineDTOs = new ArrayList<MedicineDTO>();
+			List<Medicine> medicines = new ArrayList<Medicine>();
+//			try {
+				medicines = (List<Medicine>) medicineRepository.search(name);
+//			} catch (Exception e) {
+//				responseDTO.setStatus("failed");
+//				responseDTO.setMessage(e.getMessage());
+//				return responseDTO;
+//			}
+			for (Medicine medicine : medicines) {
+				MedicineDTO medicineDTO = new MedicineDTO();
+				medicineDTO.setId(medicine.getId());
+				medicineDTO.setDescription(medicine.getDescription());
+				medicineDTO.setName(medicine.getName());
+				medicineDTO.setPrice(medicine.getPrice());
+				medicineDTO.setProductionDate(medicine.getProductionDate());
+				medicineDTO.setExpirationDate(medicine.getExpirationDate());
+				medicineDTO.setIllnesses(medicine.getIllnesses());
+				medicineDTOs.add(medicineDTO);
+			}
+			responseDTO.setMessage("status");
+			responseDTO.setStatus("success");
+			responseDTO.setData(medicineDTOs);
+			
+			return responseDTO;
+		}
+
 }

@@ -49,9 +49,9 @@ public class IllnessController {
 		return new ResponseEntity<ResponseDTO<IllnessDTO>>(response,  HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/search/{name}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseDTO<List<IllnessDTO>>> getIllnessByName(@PathVariable("name") String name) {
-		ResponseDTO<List<IllnessDTO>> response = illnessService.retreiveIllnessByName(name);
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO<List<IllnessDTO>>> getIllnessByName(@RequestBody IllnessDTO illnessDTO) {
+		ResponseDTO<List<IllnessDTO>> response = illnessService.retreiveIllnessByName(illnessDTO.getName());
 		return new ResponseEntity<ResponseDTO<List<IllnessDTO>>>(response,  HttpStatus.OK);
 	}
 	

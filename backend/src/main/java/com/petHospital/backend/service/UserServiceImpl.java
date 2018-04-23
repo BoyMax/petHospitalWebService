@@ -214,4 +214,40 @@ public class UserServiceImpl implements UserService {
 		
 		return responseDTO;
 	}
+
+	public ResponseDTO<List<UserDTO>> searchUsers(String name) {
+		ResponseDTO<List<UserDTO>> responseDTO = new ResponseDTO<List<UserDTO>>();
+		ArrayList<UserDTO> userDTOs = new ArrayList<UserDTO>();
+		List<User> users = new ArrayList<User>();
+//		try {
+			users = (List<User>) userRepository.search(name);
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
+		for (User user : users) {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setId(user.getId());
+			userDTO.setName(user.getName());
+			userDTO.setRole(user.getRole());
+			userDTO.setStatus(user.getStatus());
+			Department department = user.getDepartment();
+			if (department != null) {
+				DepartmentDTO departmentDTO = new DepartmentDTO();
+				departmentDTO.setId(user.getDepartment().getId());
+				departmentDTO.setDescription(user.getDepartment().getDescription());
+				departmentDTO.setName(user.getDepartment().getName());
+				userDTO.setDepartment(departmentDTO);
+			}
+			userDTOs.add(userDTO);
+		}
+		responseDTO.setMessage("success");
+		responseDTO.setStatus("success");
+		responseDTO.setData(userDTOs);
+		
+		return responseDTO;
+	}
+	
+	
 }

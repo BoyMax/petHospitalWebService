@@ -61,4 +61,10 @@ public class UserController{
 		ResponseDTO<List<UserDTO>> response = userService.listAllUsers();
 		return new ResponseEntity<ResponseDTO<List<UserDTO>>>(response,  HttpStatus.OK);
 	}
+    
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO<List<UserDTO>>> searchUsers(@RequestBody UserDTO user) {
+		ResponseDTO<List<UserDTO>> response = userService.searchUsers(user.getName());
+		return new ResponseEntity<ResponseDTO<List<UserDTO>>>(response,  HttpStatus.OK);
+	}
 }

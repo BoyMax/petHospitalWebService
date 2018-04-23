@@ -12,4 +12,5 @@ public interface UserService {
 	public ResponseDTO<UserDTO> editUser(UserDTO user);
 	public ResponseDTO<UserDTO> validateUser(String name,String password);
 	public ResponseDTO<List<UserDTO>> listAllUsers();
+	public ResponseDTO<List<UserDTO>> searchUsers(String name);
 }

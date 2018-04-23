@@ -11,4 +11,5 @@ public interface DepartmentService {
 	public ResponseDTO<DepartmentDTO> deleteDepartment(Long id);
 	public ResponseDTO<DepartmentDTO> editDepartment(DepartmentDTO user);
 	public ResponseDTO<List<DepartmentDTO>> listAllDepartment();
+	public ResponseDTO<List<DepartmentDTO>> searchDepartments(String name);
 }

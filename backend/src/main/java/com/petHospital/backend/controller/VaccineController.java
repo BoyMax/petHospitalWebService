@@ -54,5 +54,11 @@ public class VaccineController {
 		ResponseDTO<List<VaccineDTO>> response = vaccineService.listVaccines();
 		return new ResponseEntity<ResponseDTO<List<VaccineDTO>>>(response, HttpStatus.OK);
 	}
+    
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO<List<VaccineDTO>>> searchVaccines(@RequestBody VaccineDTO vaccine) {
+		ResponseDTO<List<VaccineDTO>> response = vaccineService.searchVaccines(vaccine.getName());
+		return new ResponseEntity<ResponseDTO<List<VaccineDTO>>>(response, HttpStatus.OK);
+	}
 }
 

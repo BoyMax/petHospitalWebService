@@ -1,5 +1,6 @@
 package com.petHospital.backend.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,12 @@ public class DepartmentController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<ResponseDTO<List<DepartmentDTO>>> listDepartments() {
 		ResponseDTO<List<DepartmentDTO>> response = departmentService.listAllDepartment();
+		return new ResponseEntity<ResponseDTO<List<DepartmentDTO>>>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO<List<DepartmentDTO>>> searchDepartments(@RequestBody DepartmentDTO departmentDTO) {
+		ResponseDTO<List<DepartmentDTO>> response = departmentService.searchDepartments(departmentDTO.getName());
 		return new ResponseEntity<ResponseDTO<List<DepartmentDTO>>>(response, HttpStatus.OK);
 	}
 

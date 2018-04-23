@@ -145,6 +145,31 @@ public class DepartmentServiceImpl implements DepartmentService {
 		return responseDTO;
 	}
 	
+	
+	
+	public ResponseDTO<List<DepartmentDTO>> searchDepartments(String name) {
+		ResponseDTO<List<DepartmentDTO>> responseDTO = new ResponseDTO<List<DepartmentDTO>>();
+		ArrayList<DepartmentDTO> departmentsDTOs = new ArrayList<DepartmentDTO>();
+		List<Department> departments = new ArrayList<Department>();
+		departments = (List<Department>) departmentRepository.search(name);
+		if (!departments.isEmpty()) {
+			for (Department department : departments) {
+				DepartmentDTO departmentDTO = new DepartmentDTO();
+				departmentDTO.setId(department.getId());
+				departmentDTO.setName(department.getName());
+				departmentDTO.setDescription(department.getDescription());
+				departmentDTO.setManagers(department.getManagers());
+				departmentsDTOs.add(departmentDTO);
+			}
+		}
+		responseDTO.setMessage("success");
+		responseDTO.setStatus("success");
+		responseDTO.setData(departmentsDTOs);
+		
+		return responseDTO;
+	}
+	
+	
 	// Validate manager id from DepartmentDTO.getManagers and then set valid manager
 	// to department.
 	private boolean validateManagers(DepartmentDTO departmentDTO, Department department, ResponseDTO<DepartmentDTO> responseDTO) {
@@ -168,5 +193,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		department.setManagers(managerEntitys);
 		return true;
 	}
+
+	
 	
 }
