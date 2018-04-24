@@ -10,9 +10,7 @@ import com.petHospital.backend.dao.CategoryRepository;
 import com.petHospital.backend.dao.QuestionRepository;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
-import com.petHospital.backend.dto.VaccineDTO;
 import com.petHospital.backend.model.Question;
-import com.petHospital.backend.model.Vaccine;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -261,6 +259,7 @@ public class QuestionServiceImpl implements QuestionService {
 			questionDTO.setCdescription(question.getCdescription());
 			questionDTO.setDdescription(question.getDdescription());
 			questionDTO.setAnswer(question.getAnswer());
+			questionDTOs.add(questionDTO);
 		}
 		responseDTO.setMessage("success");
 		responseDTO.setStatus("success");
