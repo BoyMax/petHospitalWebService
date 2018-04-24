@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
@@ -23,11 +26,13 @@ public class Category {
 	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。 
 	private List<Illness> illnesses;
 	
-	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})   
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY) 
+	@JsonIgnore
 	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。   
 	private List<Question> questions;
 
-	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH})   
+	@OneToMany(cascade= {CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY)  
+	@JsonIgnore
 	@JoinColumn(name="category_id")//注释的是另一个表指向本表的外键。   
 	private List<Exam> exams;
 	
