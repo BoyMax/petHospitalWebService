@@ -1,5 +1,6 @@
 package com.petHospital.backend.controller;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,11 @@ public class MultimediaController{
         String upaloadUrl = "/home/images/";//得到当前工程路径拼接上文件名
         System.out.println("==================caseId" + request.getParameter("caseId"));
         System.out.println("==================caseType" + request.getParameter("caseType"));
-        
+        System.out.println("==================img_base64" + request.getParameter("img_base64"));
+        System.out.println("==================attribute" + request.getAttributeNames());
+        if(request.getAttributeNames().hasMoreElements()) {
+        	System.out.println(request.getAttributeNames().nextElement());
+        }
         int caseType = Integer.valueOf(request.getParameter("caseType"));
         long caseId = Long.valueOf(request.getParameter("caseId"));
        
