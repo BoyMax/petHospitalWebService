@@ -131,7 +131,7 @@ public class CategoryServicelmpl implements CategoryService {
 				responseDTO.setMessage("success");
 				categoryDTOs.add(categoryDTO);
 			}
-			responseDTO.setMessage("status");
+			responseDTO.setMessage("success");
 			responseDTO.setStatus("success");
 			responseDTO.setData(categoryDTOs);
 			
@@ -159,5 +159,31 @@ public class CategoryServicelmpl implements CategoryService {
 			}
 			category.setIllnesses(illnessEntitys);
 			return true;
+		}
+
+		public ResponseDTO<List<CategoryDTO>> searchCategorys(String name) {
+			ResponseDTO<List<CategoryDTO>> responseDTO = new ResponseDTO<List<CategoryDTO>>();
+			ArrayList<CategoryDTO> categoryDTOs = new ArrayList<CategoryDTO>();
+			List<Category> categorys = new ArrayList<Category>();
+//			try {
+				categorys = (List<Category>) categoryRepository.search(name);
+//			} catch (Exception e) {
+//				responseDTO.setStatus("failed");
+//				responseDTO.setMessage(e.getMessage());
+//				return responseDTO;
+//			}
+			for (Category category : categorys) {
+				CategoryDTO categoryDTO = new CategoryDTO();
+				categoryDTO.setId(category.getId());
+				categoryDTO.setName(category.getName());
+				categoryDTO.setIllnesses(category.getIllnesses());
+				responseDTO.setMessage("success");
+				categoryDTOs.add(categoryDTO);
+			}
+			responseDTO.setMessage("success");
+			responseDTO.setStatus("success");
+			responseDTO.setData(categoryDTOs);
+			
+			return responseDTO;
 		} 
 }

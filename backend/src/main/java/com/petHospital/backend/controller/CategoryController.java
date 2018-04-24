@@ -55,4 +55,10 @@ public class CategoryController{
 		return new ResponseEntity<ResponseDTO<List<CategoryDTO>>>(response, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO<List<CategoryDTO>>> searchCategorys(@RequestBody CategoryDTO categoryDTO) {
+		ResponseDTO<List<CategoryDTO>> response = categoryService.searchCategorys(categoryDTO.getName());
+		return new ResponseEntity<ResponseDTO<List<CategoryDTO>>>(response, HttpStatus.OK);
+	}
+	
 }

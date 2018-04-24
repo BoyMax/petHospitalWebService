@@ -11,4 +11,5 @@ public interface CategoryService {
 	public ResponseDTO<CategoryDTO> deleteCategory(Long id);
 	public ResponseDTO<CategoryDTO> editCategory(CategoryDTO category);
 	public ResponseDTO<List<CategoryDTO>> listAllCategory(); 
+	public ResponseDTO<List<CategoryDTO>> searchCategorys(String name);
 }
