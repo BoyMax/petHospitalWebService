@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.petHospital.backend.dao.QuestionRepository;
+import com.petHospital.backend.dto.IllnessDTO;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
 import com.petHospital.backend.service.QuestionService;
@@ -61,5 +62,11 @@ public class QuestionController {
 		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response,  HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public ResponseEntity<ResponseDTO<List<QuestionDTO>>> getQuestionByName(@RequestBody QuestionDTO questionDTO) {
+		ResponseDTO<List<QuestionDTO>> response = questionService.searchQuestionByName(questionDTO.getAskDescription());
+		return new ResponseEntity<ResponseDTO<List<QuestionDTO>>>(response,  HttpStatus.OK);
+	}
+	
 
 }

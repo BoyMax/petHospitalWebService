@@ -10,7 +10,9 @@ import com.petHospital.backend.dao.CategoryRepository;
 import com.petHospital.backend.dao.QuestionRepository;
 import com.petHospital.backend.dto.QuestionDTO;
 import com.petHospital.backend.dto.ResponseDTO;
+import com.petHospital.backend.dto.VaccineDTO;
 import com.petHospital.backend.model.Question;
+import com.petHospital.backend.model.Vaccine;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -207,13 +209,13 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		
 	
-		try {
+//		try {
 			question = (List<Question>) questionRepository.listQuestionsByCategory(categoryId);
-		} catch (Exception e) {
-			responseDTO.setStatus("failed");
-			responseDTO.setMessage(e.getMessage());
-			return responseDTO;
-		}
+//		} catch (Exception e) {
+//			responseDTO.setStatus("failed");
+//			responseDTO.setMessage(e.getMessage());
+//			return responseDTO;
+//		}
 		for (Question question1 : question) {
 			QuestionDTO questionDTO = new QuestionDTO();
 			questionDTO.setId(question1.getId());
@@ -235,6 +237,40 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		return responseDTO;
 	}
+	
+	public ResponseDTO<List<QuestionDTO>> searchQuestionByName(String questionname) {
+		ResponseDTO<List<QuestionDTO>> responseDTO = new ResponseDTO<List<QuestionDTO>>();
+		ArrayList<QuestionDTO> questionDTOs = new ArrayList<QuestionDTO>();
+		List<Question> questions = new ArrayList<Question>();
+		// try {
+		questions = (List<Question>) questionRepository.search(questionname);
+		// } catch (Exception e) {
+		// responseDTO.setStatus("failed");
+		// responseDTO.setMessage(e.getMessage());
+		// return responseDTO;
+		// }
+		for (Question question : questions) {
+			QuestionDTO questionDTO = new QuestionDTO();
+			questionDTO.setId(question.getId());
+			questionDTO.setCategory(question.getCategory());
+			questionDTO.setUserType(question.getUserType());
+			questionDTO.setQuestionType(question.getQuestionType());
+			questionDTO.setAskDescription(question.getAskDescription());
+			questionDTO.setAdescription(question.getAdescription());
+			questionDTO.setBdescription(question.getBdescription());
+			questionDTO.setCdescription(question.getCdescription());
+			questionDTO.setDdescription(question.getDdescription());
+			questionDTO.setAnswer(question.getAnswer());
+		}
+		responseDTO.setMessage("success");
+		responseDTO.setStatus("success");
+		responseDTO.setData(questionDTOs);
+
+		return responseDTO;
+	}
+	
+	
+	
 	private boolean validateEditIds(QuestionDTO questionDTO, Question question, ResponseDTO<QuestionDTO> responseDTO) {
 		Long id = questionDTO.getId();
 

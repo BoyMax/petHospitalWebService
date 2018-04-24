@@ -12,6 +12,7 @@ public interface QuestionService {
 	public ResponseDTO<QuestionDTO> editQuestion(QuestionDTO user);
 	public ResponseDTO<List<QuestionDTO>> listAllQuestion();
 	public ResponseDTO<List<QuestionDTO>> listQuestionByCategory(Long id);
+	public ResponseDTO<List<QuestionDTO>> searchQuestionByName(String questionname);
 
 }
 
