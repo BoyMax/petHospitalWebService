@@ -30,12 +30,10 @@ public class MultimediaController{
         MultipartHttpServletRequest Murequest = (MultipartHttpServletRequest)request;
         Map<String, MultipartFile> files = Murequest.getFileMap();//得到文件map对象
         String upaloadUrl = "/home/images/";//得到当前工程路径拼接上文件名
-        /*int caseType = Integer.valueOf(request.getParameter("caseType"));
+        int caseType = Integer.valueOf(request.getParameter("caseType"));
         long caseId = Long.valueOf(request.getParameter("caseId"));
-        System.out.println(request.getParameter("caseId"));
-        System.out.println(request.getParameter("caseType"));*/
-        int caseType = 1;
-        long caseId = 1;
+        System.out.println("==================caseId" + request.getParameter("caseId"));
+        System.out.println("==================caseType" + request.getParameter("caseType"));
         ResponseDTO<List<MultimediaDTO>> response = null;
 		try {
 			response = multimediaService.uploadPic(files, upaloadUrl, caseId, caseType, 0);
